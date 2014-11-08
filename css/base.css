@@ -19,7 +19,7 @@ div#container {
 }
 
 header {
-	padding: 5px 1%;
+	padding: 5px 1.5%;
 	box-shadow: 0 5px 3px #888888;
 }
 
@@ -30,11 +30,11 @@ header>div#headerText {
 
 /* Header search styling */
 header>div#headerSearch {
-	margin: 0 10%;
+	margin: 0 12%;
 }
 
 header>div#headerSearch input {
-	width: 50%;
+	width: 60%;
 	padding: 10px;
 	border-radius: 3px;
 }
@@ -42,6 +42,34 @@ header>div#headerSearch input {
 header>div#headerSearch button {
 	padding: 10px;
 	border-radius: 3px;
+}
+
+header>div#headerRight {
+	float: right;
+	font-weight: bold;
+}
+
+/* Category Navigation */
+aside#catNav {
+	width: 15%;
+	padding: 2px;
+	margin-top: .7%;
+	background-color: #e5e2d9;
+	border-radius: 0 5px 5px 0;
+	box-shadow: 3px 3px 2px #888888;
+}
+
+aside#catNav>nav {
+	padding: 0 7%;
+}
+
+aside#catNav>nav>ul {
+	padding-left: 2%;
+}
+
+aside#catNav>nav>ul>li {
+	list-style: none;
+	font-weight: bold;
 }
 
 main {
