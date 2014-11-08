@@ -1,0 +1,49 @@
+/* 
+    Created on : 08-Nov-2014, 11:55:08
+    Author     : Edward McKnight (UP608985)
+*/
+
+@import url(http://fonts.googleapis.com/css?family=Roboto:400italic,700,400); /* Google's Roboto Font */
+
+body {
+	font-family: 'Roboto', sans-serif;
+	margin: 0;
+}
+
+button {
+	cursor: pointer;
+}
+
+div#container {
+	width: 100%;
+}
+
+header {
+	padding: 5px 1%;
+	box-shadow: 0 5px 3px #888888;
+}
+
+header>div#headerText {
+	font-weight: bold;
+	font-size: 140%;
+}
+
+/* Header search styling */
+header>div#headerSearch {
+	margin: 0 10%;
+}
+
+header>div#headerSearch input {
+	width: 50%;
+	padding: 10px;
+	border-radius: 3px;
+}
+
+header>div#headerSearch button {
+	padding: 10px;
+	border-radius: 3px;
+}
+
+main {
+	display: block; /* Neccessary for older browsers which don't display the "main" element correctly */
+}
