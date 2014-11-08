@@ -3,7 +3,7 @@
     Author     : Edward McKnight (UP608985)
 */
 
-@import url(http://fonts.googleapis.com/css?family=Roboto:400italic,700,400); /* Google's Roboto Font */
+@import url(//fonts.googleapis.com/css?family=Roboto:400italic,700,400); /* Google's Roboto Font */
 
 body {
 	font-family: 'Roboto', sans-serif;
@@ -20,7 +20,7 @@ div#container {
 
 header {
 	padding: 5px 1.5%;
-	box-shadow: 0 5px 3px #888888;
+	box-shadow: 0 3px 3px #888888;
 }
 
 header>div#headerText {
@@ -46,17 +46,23 @@ header>div#headerSearch button {
 
 header>div#headerRight {
 	float: right;
+}
+
+header>div#headerRight>span.link {
 	font-weight: bold;
+	margin-left: 10%;
 }
 
 /* Category Navigation */
 aside#catNav {
+	float: left;
 	width: 15%;
 	padding: 2px;
-	margin-top: .7%;
+	margin: .7% 0 1% 0;
 	background-color: #e5e2d9;
 	border-radius: 0 5px 5px 0;
 	box-shadow: 3px 3px 2px #888888;
+	overflow-x: hidden; /* Hide overflowing content when screen size is squashed, stops text flowing over the element */
 }
 
 aside#catNav>nav {
@@ -72,6 +78,22 @@ aside#catNav>nav>ul>li {
 	font-weight: bold;
 }
 
+/* Main content styling */
 main {
+	float: left;
 	display: block; /* Neccessary for older browsers which don't display the "main" element correctly */
+	width: 75%;
+	margin: 1%;
+}
+
+main>section#featured>h1 {
+	margin: 0;
+}
+
+/* Footer styling */
+footer {
+	clear: both;
+	padding-top: 1%;
+	box-shadow: 0 -2px 3px #888888;
+	text-align: center;
 }
