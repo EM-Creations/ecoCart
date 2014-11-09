@@ -30,7 +30,7 @@ header>div#headerText {
 
 /* Header search styling */
 header>div#headerSearch {
-	margin: 0 12%;
+	margin-left: 12%;
 }
 
 header>div#headerSearch input {
@@ -50,7 +50,10 @@ header>div#headerRight {
 
 header>div#headerRight>span.link {
 	font-weight: bold;
-	margin-left: 10%;
+}
+
+header>div#headerRight>span.link#last {
+	margin-left: 10px;
 }
 
 /* Category Navigation */
