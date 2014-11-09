@@ -18,41 +18,41 @@ div#container {
 	width: 100%;
 }
 
-header {
+header#mainHeader {
 	padding: 5px 1.5%;
 	box-shadow: 0 3px 3px #888888;
 }
 
-header>div#headerText {
+header#mainHeader>div#headerText {
 	font-weight: bold;
 	font-size: 140%;
 }
 
 /* Header search styling */
-header>div#headerSearch {
+header#mainHeader>div#headerSearch {
 	margin-left: 12%;
 }
 
-header>div#headerSearch input {
+header#mainHeader>div#headerSearch input {
 	width: 60%;
 	padding: 10px;
 	border-radius: 3px;
 }
 
-header>div#headerSearch button {
+header#mainHeader>div#headerSearch button {
 	padding: 10px;
 	border-radius: 3px;
 }
 
-header>div#headerRight {
+header#mainHeader>div#headerRight {
 	float: right;
 }
 
-header>div#headerRight>span.link {
+header#mainHeader>div#headerRight>span.link {
 	font-weight: bold;
 }
 
-header>div#headerRight>span.link#last {
+header#mainHeader>div#headerRight>span.link#last {
 	margin-left: 10px;
 }
 
@@ -86,11 +86,43 @@ main {
 	float: left;
 	display: block; /* Neccessary for older browsers which don't display the "main" element correctly */
 	width: 75%;
-	margin: 1%;
+	margin: 1% 2%;
 }
 
 main>section#featured>h1 {
 	margin: 0;
+	margin-bottom: 1%;
+}
+
+/* Grid styling */
+main div.grid {
+	width: 100%;
+}
+
+main div.grid>section.grid-item {
+	float: left;
+	margin-right: 2%;
+	margin-bottom: 2%;
+	box-shadow: 0 3px 3px #888888;
+	border: 1px solid #D6D6D6;
+	width: 20%;
+	min-width: 200px; /* Set a minimum width so that they move down the screen rather than getting inifinitely smaller, when the screen is squashed */
+	padding: 1%;
+}
+
+main div.grid>section.grid-item>img {
+	width: 100%;
+	height: 100%;
+}
+
+main div.grid>section.grid-item>header {
+	text-align: center;
+	font-weight: bold;
+}
+
+main div.grid>section.grid-item>div.price {
+	color: #6B6B6B;
+	font-weight: bold;
 }
 
 /* Footer styling */
