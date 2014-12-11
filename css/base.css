@@ -58,14 +58,23 @@ header#mainHeader>div#headerRight>span.link#last {
 
 /* Category Navigation */
 aside#catNav {
+	position: absolute;
 	float: left;
-	width: 15%;
+	width: 5%;
+	max-height: 600px;
 	padding: 2px;
 	margin: .7% 0 1% 0;
 	background-color: #e5e2d9;
 	border-radius: 0 5px 5px 0;
 	box-shadow: 3px 3px 2px #888888;
 	overflow-x: hidden; /* Hide overflowing content when screen size is squashed, stops text flowing over the element */
+	overflow-y: hidden;
+	transition: width .5s; /* Transition Effect */
+}
+
+aside#catNav:hover {
+	width: 15%;
+	max-height: none; /* No max height when hovered over */
 }
 
 aside#catNav>nav {
@@ -79,6 +88,7 @@ aside#catNav>nav>ul {
 aside#catNav>nav>ul>li {
 	list-style: none;
 	font-weight: bold;
+	overflow-x: hidden;
 }
 
 /* Main content styling */
@@ -86,7 +96,8 @@ main {
 	float: left;
 	display: block; /* Neccessary for older browsers which don't display the "main" element correctly */
 	width: 75%;
-	margin: 1% 2%;
+	min-height: 600px; /* TODO: May have to change this later to be more dynamic */
+	margin: 1% 8%;
 }
 
 main>section#featured>h1 {
