@@ -19,13 +19,14 @@ div#container {
 }
 
 header#mainHeader {
-	padding: 5px 1.5%;
+	padding: 20px 1.5% 10px 1.5%;
 	box-shadow: 0 3px 3px #888888;
 }
 
-header#mainHeader>div#headerText {
-	font-weight: bold;
-	font-size: 140%;
+header#mainHeader>canvas#headerLogo {
+	float: left;
+	width: 150px;
+	height: 75px;
 }
 
 /* Header search styling */
@@ -156,7 +157,7 @@ body>div#modalHider { /* sadasidha. (2012). Show a div as a modal pop up. Retrie
 	opacity: 0.6; /* for transparency */
 }
 
-body>#modalLoading { /* sadasidha. (2012). Show a div as a modal pop up. Retrieved from http://stackoverflow.com/questions/6263303/show-a-div-as-a-modal-pop-up */
+body>div#modalLoading { /* sadasidha. (2012). Show a div as a modal pop up. Retrieved from http://stackoverflow.com/questions/6263303/show-a-div-as-a-modal-pop-up */
 	position: fixed;
 	text-align: center;
 	font-size: 16pt;
@@ -168,4 +169,13 @@ body>#modalLoading { /* sadasidha. (2012). Show a div as a modal pop up. Retriev
 	margin-top: -5em;  /* set to a negative number 1/2 of your height */
 	margin-left: -5em;  /* set to a negative number 1/2 of your width */
 	z-index: 100;
+}
+
+body>div#modalLoading>div#loadingText {
+	margin-left: -35px;
+}
+
+body>div#modalLoading>canvas#modalLogo {
+	width: 150px;
+	height: 75px;
 }
