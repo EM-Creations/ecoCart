@@ -42,17 +42,18 @@ foreach ($tableExistence as $tableName) { // For each required table
 							`name` varchar(100) NOT NULL,
 							`description` text NOT NULL,
 							`weight` double NOT NULL,
-							`featured` tinyint(4) NOT NULL,
+							`featured` tinyint(1) NOT NULL,
 							PRIMARY KEY (`id`),
 							UNIQUE KEY `id` (`id`)
-						  ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;";
+						  ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;";
 				break;
 			
 			case "item_image":
 				$query = "CREATE TABLE `item_image` (
 							`item_id` int(11) NOT NULL,
 							`image` varchar(100) NOT NULL,
-							`main` tinyint(4) NOT NULL
+							`main` tinyint(1) NOT NULL,
+							PRIMARY KEY (`item_id`,`image`)
 						  ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 				break;
 			
