@@ -28,6 +28,20 @@ switch ($action) { // Process the specified action
 		$jsonResp['resp'] = $catSearch->execute();
 		// </editor-fold>
 		break;
+		
+	case "time":
+		// <editor-fold defaultstate="collapsed" desc="Process time action">
+		$ssv = Lib::getRequestVar('ssv', FILTER_SANITIZE_STRING);
+		
+		if (isset($ssv)) { // If the special search value is set
+			$format = $ssv;
+		} else { // If the special search value isn't set
+			$format = "d/m/Y"; // Default time format: day/month/year
+		}
+		
+		$jsonResp['resp'] = date($format);
+		// </editor-fold>
+		break;
 	
 	default: // If the action is invalid
 		$jsonResp['resp']['error'] = ['code' => 501, 'msg' => "Not implemented"];
