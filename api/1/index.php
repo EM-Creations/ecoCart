@@ -14,6 +14,7 @@
 
 require("../config.inc.php"); // Require the database config file
 require("./Lib.class.php"); // Require the Library class
+require("./APIAction.class.php"); // Require the APIAction abstract class
 
 $action = Lib::getRequestVar('a', FILTER_SANITIZE_STRING);
 

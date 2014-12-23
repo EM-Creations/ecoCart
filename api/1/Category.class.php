@@ -4,29 +4,34 @@
  *
  * @author Edward McKnight (UP608985)
  */
-class Category {
-	private $id;
-	private $start;
-	private $limit;
+class Category extends APIAction {
 	private $parent;
 	
+	/**
+	 * Constructor
+	 */
 	public function __construct() {
 		// <editor-fold defaultstate="collapsed" desc="Constructor">
-		$this->id = false;
-		$this->start = 0;
-		$this->limit = false;
+		parent::__construct("categories");
 		$this->parent = -1;
 		// </editor-fold>
 	}
 	
-	public function setID($newID) {
-		$this->id = $newID;
-	}
-	
+	/**
+	 * Set the parent to search for
+	 * 
+	 * @param int $parentID
+	 */
 	public function setParent($parentID) {
 		$this->parent = (int) $parentID;
 	}
 	
+	/**
+	 * Execute the search and return the results
+	 * 
+	 * @global PDO $db_conn
+	 * @return Array
+	 */
 	public function execute() {
 		// <editor-fold defaultstate="collapsed" desc="execute">
 		global $db_conn;
