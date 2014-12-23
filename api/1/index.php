@@ -4,7 +4,7 @@
  * ecoCart API Version 1 routing / processing file
  */
 
-// Routing design: /api/{version}/?a={action}[&id={id}][&name={name}][&ssv={special search value}][&start={startVal}][&limit={limitVal}]
+// Routing design: /api/{version}/?a={action}[&id={id}][&name={name}][&ssv={special search value}][&start={startVal}][&limit={limitVal}][&orderBy={orderVal}][&orderType={ASC|DESC}]
 
 /**
  * HELP:
@@ -47,6 +47,47 @@ switch ($action) { // Process the specified action
 		}
 		
 		$jsonResp['resp'] = date($format);
+		// </editor-fold>
+		break;
+		
+	case "setting":
+		// <editor-fold defaultstate="collapsed" desc="Process setting action">
+		require("./Setting.class.php"); // Include the Setting class
+		
+		$id = Lib::getRequestVar('id', FILTER_SANITIZE_NUMBER_INT);
+		$name = Lib::getRequestVar('name', FILTER_SANITIZE_STRING);
+		$start = Lib::getRequestVar('start', FILTER_SANITIZE_NUMBER_INT);
+		$limit = Lib::getRequestVar('limit', FILTER_SANITIZE_NUMBER_INT);
+		$orderBy = Lib::getRequestVar('orderBy', FILTER_SANITIZE_STRING);
+		$orderType = Lib::getRequestVar('orderType', FILTER_SANITIZE_STRING);
+		
+		$settingSearch = new Setting();
+	
+		if (isset($id) && is_numeric($id)) {
+			$settingSearch->setID($id);
+		}
+		
+		if (isset($name)) {
+			$settingSearch->setName($name);
+		}
+		
+		if (isset($start) && is_numeric($start)) {
+			$settingSearch->setStart($start);
+		}
+		
+		if (isset($limit) && is_numeric($limit)) {
+			$settingSearch->setLimit($limit);
+		}
+		
+		if (isset($orderBy)) {
+			$settingSearch->setOrderBy($orderBy);
+		}
+		
+		if (isset($orderType)) {
+			$settingSearch->setOrderType($orderType);
+		}
+		
+		$jsonResp['resp'] = $settingSearch->execute();
 		// </editor-fold>
 		break;
 	
