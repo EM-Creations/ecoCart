@@ -5,7 +5,7 @@
 
 require("../config.inc.php"); // Require the configuration file
 
-$tableExistence = ["category", "delivery_option", "item", "item_image", "order", "order_item"];
+$tableExistence = ["category", "delivery_option", "item", "item_image", "order", "order_item", "setting"];
 
 foreach ($tableExistence as $tableName) { // For each required table
 	try { // Try to query it
@@ -79,6 +79,16 @@ foreach ($tableExistence as $tableName) { // For each required table
 							`item_id` bigint(20) NOT NULL,
 							`quantity` int(11) NOT NULL,
 							PRIMARY KEY (`order_id`,`item_id`)
+						  ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+				break;
+			
+			case "setting":
+				$query = "CREATE TABLE `setting` (
+							`id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+							`name` varchar(100) NOT NULL,
+							`value` varchar(255) NOT NULL,
+							PRIMARY KEY (`id`),
+							UNIQUE KEY `id` (`id`)
 						  ) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 				break;
 			
