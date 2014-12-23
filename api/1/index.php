@@ -1,9 +1,16 @@
 <?php
 /**
  * Author: Edward McKnight (UP608985)
+ * ecoCart API Version 1 routing / processing file
  */
 
 // Routing design: /api/{version}/?a={action}[&id={id}][&name={name}][&ssv={special search value}][&start={startVal}][&limit={limitVal}]
+
+/**
+ * HELP:
+ *	'a' variable - The action (part of the API) being requested
+ *	'ssv' variable - "Special Search Value", used by different actions to reference values specific to them
+ */
 
 require("../config.inc.php"); // Require the database config file
 require("./Lib.class.php"); // Require the Library class
