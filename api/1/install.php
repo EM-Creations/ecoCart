@@ -43,6 +43,7 @@ foreach ($tableExistence as $tableName) { // For each required table
 							`description` text NOT NULL,
 							`weight` double NOT NULL,
 							`featured` tinyint(1) NOT NULL,
+							`price` double NOT NULL,
 							PRIMARY KEY (`id`),
 							UNIQUE KEY `id` (`id`)
 						  ) ENGINE=InnoDB  DEFAULT CHARSET=latin1;";

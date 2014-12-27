@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 23, 2014 at 04:22 PM
+-- Generation Time: Dec 27, 2014 at 01:07 PM
 -- Server version: 5.5.36
 -- PHP Version: 5.4.25
 
@@ -88,6 +88,7 @@ CREATE TABLE IF NOT EXISTS `item` (
   `description` text NOT NULL,
   `weight` double NOT NULL,
   `featured` tinyint(1) NOT NULL,
+  `price` double NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
@@ -96,11 +97,11 @@ CREATE TABLE IF NOT EXISTS `item` (
 -- Dumping data for table `item`
 --
 
-INSERT INTO `item` (`id`, `cat`, `name`, `description`, `weight`, `featured`) VALUES
-(1, 6, 'Calculator', 'Superb classic calculator for home and business use.', 0.1, 1),
-(2, 6, '22 in PC monitor', 'Brand new 22 inch wide screen PC monitor.', 2, 1),
-(3, 5, 'Paperclip', 'Steel paperclips, always needed.', 0.001, 1),
-(4, 5, 'Colouring pencils set', 'Set of 5 colouring pencils: red, green, pink, black, yellow', 0.05, 1);
+INSERT INTO `item` (`id`, `cat`, `name`, `description`, `weight`, `featured`, `price`) VALUES
+(1, 6, 'Calculator', 'Superb classic calculator for home and business use.', 0.1, 1, 1.99),
+(2, 6, '22 in PC monitor', 'Brand new 22 inch wide screen PC monitor.', 2, 1, 119.99),
+(3, 5, 'Paperclip', 'Steel paperclips, always needed.', 0.001, 1, 0.39),
+(4, 5, 'Colouring pencils set', 'Set of 5 colouring pencils: red, green, pink, black, yellow', 0.05, 1, 0.99);
 
 -- --------------------------------------------------------
 
