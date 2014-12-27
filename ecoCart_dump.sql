@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2014 at 01:07 PM
+-- Generation Time: Dec 27, 2014 at 03:36 PM
 -- Server version: 5.5.36
 -- PHP Version: 5.4.25
 
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `name` varchar(100) NOT NULL,
   `parent_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `category`
@@ -45,7 +45,8 @@ INSERT INTO `category` (`id`, `name`, `parent_id`) VALUES
 (5, 'Stationary', 4),
 (6, 'Electronics', 0),
 (7, 'Sports', 0),
-(8, 'Toys', 0);
+(8, 'Toys', 0),
+(9, 'Accessories', 6);
 
 -- --------------------------------------------------------
 
