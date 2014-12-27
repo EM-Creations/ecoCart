@@ -137,6 +137,34 @@ main div.grid>section.grid-item>div.price {
 	font-weight: bold;
 }
 
+/* Item */
+section#item { /* Focussed item's display section */
+	float: left;
+	margin: 0 2%;
+	box-shadow: 0 3px 3px #888888;
+	border: 1px solid #D6D6D6;
+	width: 100%;
+	min-width: 200px; /* Set a minimum width so that they move down the screen rather than getting inifinitely smaller, when the screen is squashed */
+	padding: 1%;
+}
+
+section#item>img#main {
+	
+}
+
+section#item>header {
+	font-weight: bold;
+}
+
+section#item>div.price {
+	color: #6B6B6B;
+	font-weight: bold;
+}
+
+.item-link {
+	color: #00248F;
+}
+
 /* Footer styling */
 footer {
 	clear: both;
