@@ -20,13 +20,20 @@ $action = Lib::getRequestVar('a', FILTER_SANITIZE_STRING);
 
 $jsonResp = []; // JSON response variable
 
+$id = Lib::getRequestVar('id', FILTER_SANITIZE_NUMBER_INT);
+$name = Lib::getRequestVar('name', FILTER_SANITIZE_STRING);
+$start = Lib::getRequestVar('start', FILTER_SANITIZE_NUMBER_INT);
+$limit = Lib::getRequestVar('limit', FILTER_SANITIZE_NUMBER_INT);
+$orderBy = Lib::getRequestVar('orderBy', FILTER_SANITIZE_STRING);
+$orderType = Lib::getRequestVar('orderType', FILTER_SANITIZE_STRING);
+$ssv = Lib::getRequestVar('ssv', FILTER_SANITIZE_NUMBER_INT);
+
 switch ($action) { // Process the specified action
 	// <editor-fold defaultstate="collapsed" desc="Process actions">
 	case "categories":
 		// <editor-fold defaultstate="collapsed" desc="Process categories action">
 		require("./Category.class.php"); // Include the Category class
 		
-		$ssv = Lib::getRequestVar('ssv', FILTER_SANITIZE_NUMBER_INT);
 		$catSearch = new Category();
 
 		if (is_numeric($ssv)) {
@@ -39,7 +46,7 @@ switch ($action) { // Process the specified action
 		
 	case "time":
 		// <editor-fold defaultstate="collapsed" desc="Process time action">
-		$ssv = Lib::getRequestVar('ssv', FILTER_SANITIZE_STRING);
+		$ssv = Lib::getRequestVar('ssv', FILTER_SANITIZE_STRING); // Override default $ssv handling to look for a string instead
 		
 		if (isset($ssv)) { // If the special search value is set
 			$format = $ssv;
@@ -54,13 +61,6 @@ switch ($action) { // Process the specified action
 	case "setting":
 		// <editor-fold defaultstate="collapsed" desc="Process setting action">
 		require("./Setting.class.php"); // Include the Setting class
-		
-		$id = Lib::getRequestVar('id', FILTER_SANITIZE_NUMBER_INT);
-		$name = Lib::getRequestVar('name', FILTER_SANITIZE_STRING);
-		$start = Lib::getRequestVar('start', FILTER_SANITIZE_NUMBER_INT);
-		$limit = Lib::getRequestVar('limit', FILTER_SANITIZE_NUMBER_INT);
-		$orderBy = Lib::getRequestVar('orderBy', FILTER_SANITIZE_STRING);
-		$orderType = Lib::getRequestVar('orderType', FILTER_SANITIZE_STRING);
 		
 		$settingSearch = new Setting();
 	
@@ -89,6 +89,44 @@ switch ($action) { // Process the specified action
 		}
 		
 		$jsonResp['resp'] = $settingSearch->execute();
+		// </editor-fold>
+		break;
+		
+	case "item":
+		// <editor-fold defaultstate="collapsed" desc="Process item action">
+		require("./Item.class.php"); // Include the Setting class
+		
+		$itemSearch = new Item();
+	
+		if (isset($id) && is_numeric($id)) {
+			$itemSearch->setID($id);
+		}
+		
+		if (isset($name)) {
+			$itemSearch->setName($name);
+		}
+		
+		if (isset($start) && is_numeric($start)) {
+			$itemSearch->setStart($start);
+		}
+		
+		if (isset($limit) && is_numeric($limit)) {
+			$itemSearch->setLimit($limit);
+		}
+		
+		if (isset($orderBy)) {
+			$itemSearch->setOrderBy($orderBy);
+		}
+		
+		if (isset($orderType)) {
+			$itemSearch->setOrderType($orderType);
+		}
+		
+		if (is_numeric($ssv)) { // Don't add "isset" check; it causes breakages if the value is 0
+			$itemSearch->setFeatured($ssv);
+		}
+		
+		$jsonResp['resp'] = $itemSearch->execute();
 		// </editor-fold>
 		break;
 	
