@@ -101,8 +101,9 @@ main {
 	margin: 1% 8%;
 }
 
-main>section#featured>h1 {
-	margin: 0;
+main>section#featured>header {
+	font-size: 18pt;
+	font-weight: bold;
 	margin-bottom: 1%;
 }
 
