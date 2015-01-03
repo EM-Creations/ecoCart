@@ -167,6 +167,10 @@ section#item>div.price {
 	color: #00248F;
 }
 
+.item-link:hover {
+	color: #CCCC00;
+}
+
 .link {
 	cursor: pointer;
 }
