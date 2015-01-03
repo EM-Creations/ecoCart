@@ -36,6 +36,30 @@ switch ($action) { // Process the specified action
 		
 		$catSearch = new Category();
 
+		if (isset($id) && is_numeric($id)) {
+			$catSearch->setID($id);
+		}
+		
+		if (isset($name)) {
+			$catSearch->setName($name);
+		}
+		
+		if (isset($start) && is_numeric($start)) {
+			$catSearch->setStart($start);
+		}
+		
+		if (isset($limit) && is_numeric($limit)) {
+			$catSearch->setLimit($limit);
+		}
+		
+		if (isset($orderBy)) {
+			$catSearch->setOrderBy($orderBy);
+		}
+		
+		if (isset($orderType)) {
+			$catSearch->setOrderType($orderType);
+		}
+		
 		if (is_numeric($ssv)) {
 			$catSearch->setParent($ssv); // Set that we're looking for categories with a specific parent
 		}
