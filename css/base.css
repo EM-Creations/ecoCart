@@ -99,7 +99,7 @@ main {
 	display: block; /* Neccessary for older browsers which don't display the "main" element correctly */
 	width: 75%;
 	min-height: 600px; /* TODO: May have to change this later to be more dynamic */
-	margin: 1% 8%;
+	margin: 0 8% 1% 8%;
 }
 
 main>section#featured>header {
@@ -137,6 +137,12 @@ main div.grid>section.grid-item>header {
 main div.grid>section.grid-item>div.price {
 	color: #6B6B6B;
 	font-weight: bold;
+}
+
+/* View item pages */
+main>nav#catHierarchy {
+	margin: 0 2% 1% 2%;
+	color: #999999;
 }
 
 /* Item */
