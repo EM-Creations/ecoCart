@@ -27,6 +27,7 @@ header#mainHeader>canvas#headerLogo {
 	float: left;
 	width: 150px;
 	height: 75px;
+	cursor: pointer;
 }
 
 /* Header search styling */
@@ -164,6 +165,10 @@ section#item>div.price {
 
 .item-link {
 	color: #00248F;
+}
+
+.link {
+	cursor: pointer;
 }
 
 /* Footer styling */
