@@ -60,4 +60,34 @@ class Main extends API {
 		}
 		// </editor-fold>
 	}
+	
+	protected function item($args) {
+		// <editor-fold defaultstate="collapsed" desc="item">
+		global $db_conn;
+		
+		switch ($this->method) {
+			case "GET":
+				// <editor-fold defaultstate="collapsed" desc="GET">
+				$stmt = null;
+				$str = "SELECT `item`.`id`, `item`.`cat`, `item`.`name`, `item`.`description`, `item`.`weight`, `item`.`price`, `item_image`.`main` as `main_image`, `item_image`.`image`  FROM `item` LEFT JOIN `item_image` ON `item`.`id`=`item_image`.`item_id`";
+
+				if (isset($args[0]) && is_numeric($args[0])) { // If we're returning a specific item
+					$str .= " WHERE `id` = :id";
+					$stmt = $db_conn->prepare($str);
+					$stmt->bindParam(":id", $args[0]);
+				} else if (isset($args[0]) && ($args[0] == "featured")) { // If we're returning featured items
+					$str .= " WHERE `featured` = 1";
+					$stmt = $db_conn->prepare($str);
+				}
+				
+				$stmt->execute();
+				$this->resp['data'] = $stmt->fetchAll(PDO::FETCH_ASSOC); // Return the results
+				// </editor-fold>
+				break;
+			
+			default:
+				$this->statusCode = 405;
+		}
+		// </editor-fold>
+	}
 }
