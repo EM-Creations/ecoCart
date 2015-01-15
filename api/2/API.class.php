@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Abstract API class
  *
@@ -19,11 +18,27 @@ abstract class API {
 	 * @var string
 	 */
 	protected $endPoint = "";
-	protected $specialAction = "";
-	protected $args = []; // Arguments
+	
+	/**
+	 * Arguments
+	 * 
+	 * @var array
+	 */
+	protected $args = [];
+	
+	/**
+	 * Response to be returned
+	 * 
+	 * @var array
+	 */
 	protected $resp = ['data' => null]; // Response array (to be output as JSON)
+	
+	/**
+	 * Status code to be used and returned
+	 * 
+	 * @var int
+	 */
 	protected $statusCode = 200;
-	protected $file = null;
 
 	/**
 	 * Constructor

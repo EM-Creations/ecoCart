@@ -10,7 +10,7 @@ class Main extends API {
 	/**
 	 * Time end point
 	 * 
-	 * @param array $arg
+	 * @param array $args
 	 */
 	protected function time($args) {
 		// <editor-fold defaultstate="collapsed" desc="time">
@@ -28,6 +28,12 @@ class Main extends API {
 		// </editor-fold>
 	}
 	
+	/**
+	 * Categories end point
+	 * 
+	 * @global PDO $db_conn
+	 * @param array $args
+	 */
 	protected function categories($args) {
 		// <editor-fold defaultstate="collapsed" desc="categories">
 		global $db_conn;
@@ -61,6 +67,12 @@ class Main extends API {
 		// </editor-fold>
 	}
 	
+	/**
+	 * Item end point
+	 * 
+	 * @global PDO $db_conn
+	 * @param array $args
+	 */
 	protected function item($args) {
 		// <editor-fold defaultstate="collapsed" desc="item">
 		global $db_conn;
