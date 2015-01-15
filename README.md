@@ -7,13 +7,13 @@ ecoCart - University WEBSCRP coursework, but who knows where it might lead after
 
 Author
 -----------
-Edward McKnight (EM-Creations.co.uk)
+Edward McKnight (UP608985)
 
 Directory hierarchy explanation
 -----------  
 * **admin** - Admin directory, for access by administrators only  
-* **api** - PHP API files will be located here  
-* **css** - CSS files will be located here  
-* **images** - Image resources will be located here  
-* **lib** - JavaScript files will be located here  
+* **api** - PHP API files are be located here  
+* **css** - CSS files are be located here  
+* **images** - Image resources are be located here  
+* **lib** - JavaScript files are be located here  
 * **prototyping** - Directory containing prototypes built  
