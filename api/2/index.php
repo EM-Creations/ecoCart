@@ -8,8 +8,7 @@
 // Example: "/api/2/categories/featured" and "/api/2/item/1"
 
 require(__DIR__ . "/../config.inc.php"); // Require the database configuration file
-require(__DIR__ . "/API.class.php"); // Require the abstract API class
-require(__DIR__ . "/Main.class.php"); // Require the main class containing the end point handlers
+require(__DIR__ . "/autoload.inc.php"); // Require the autoload file (saves time having to require each class used)
 
 try {
 	$api = new Main();
