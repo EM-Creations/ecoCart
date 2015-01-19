@@ -6,11 +6,11 @@
 /*
  * Only Edit the below constant definitions
  */
-define("DB_TYPE", "mysql");
-define("DB_HOST", "localhost");
-define("DB_NAME", "ecocart");
-define("DB_USER", "root");
-define("DB_PASSWORD", "");
+const DB_TYPE = "mysql";
+const DB_HOST = "localhost";
+const DB_NAME = "ecocart";
+const DB_USER = "root";
+const DB_PASSWORD = "";
 /*
  * DO NOT MODIFY ANYTHING BELOW
  */
