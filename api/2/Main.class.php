@@ -90,6 +90,18 @@ class Main extends API {
 				} else if (isset($args[0]) && ($args[0] == "featured")) { // If we're returning featured items
 					$str .= " WHERE `featured` = 1";
 					$stmt = $db_conn->prepare($str);
+				} else if (isset($args[0]) && ($args[0] == "category")) { // If we're returning items within a specific category
+					if (isset($args[1]) && is_numeric($args[1])) { // If the category ID is present
+						$str .= " WHERE `cat` = :cat";
+						$stmt = $db_conn->prepare($str);
+						$stmt->bindParam(":cat", $args[1]);
+					} else { // If the category ID is not present
+						$this->statusCode = 404;
+						break;
+					}
+				} else { // If the arguments aren't supported
+					$this->statusCode = 404;
+					break;
 				}
 				
 				$stmt->execute();
