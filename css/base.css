@@ -102,7 +102,7 @@ main {
 	margin: 0 8% 1% 8%;
 }
 
-main>section#featured>header {
+main>section#featured>header, main>section#products>header {
 	font-size: 18pt;
 	font-weight: bold;
 	margin-bottom: 1%;
@@ -169,16 +169,14 @@ section#item>div.price {
 	font-weight: bold;
 }
 
-.item-link {
-	color: #00248F;
-}
-
-.item-link:hover {
-	color: #CCCC00;
-}
-
 .link {
+	color: #00248F;
+	text-decoration: none;
 	cursor: pointer;
+}
+
+.link:hover {
+	color: #CCCC00;
 }
 
 /* Footer styling */
