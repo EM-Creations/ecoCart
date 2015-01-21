@@ -99,6 +99,16 @@ class Main extends API {
 						$this->statusCode = 404;
 						break;
 					}
+				} else if (isset($args[0]) && ($args[0] == "search")) { // If we're returning searched for items
+					if (isset($args[1]) && is_string($args[1])) { // If the search value is present
+						$str .= " WHERE `name` LIKE :search";
+						$stmt = $db_conn->prepare($str);
+						$args[1] = "%" . $args[1] . "%"; // Add wildcard characters around the search value
+						$stmt->bindParam(":search", $args[1]);
+					} else { // If the search value isn't present
+						$this->statusCode = 404;
+						break;
+					}
 				} else { // If the arguments aren't supported
 					$this->statusCode = 404;
 					break;
