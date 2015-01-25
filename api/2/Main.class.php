@@ -124,4 +124,42 @@ class Main extends API {
 		}
 		// </editor-fold>
 	}
+	
+	protected function delivery($args) {
+		// <editor-fold defaultstate="collapsed" desc="delivery">
+		global $db_conn;
+		
+		switch ($this->method) {
+			case "GET":
+				// <editor-fold defaultstate="collapsed" desc="GET">
+				$stmt = null;
+				$str = "SELECT * FROM `delivery_option`";
+
+				if (isset($args[0]) && is_numeric($args[0])) { // If we're returning a specific delivery option
+					$str .= " WHERE `id` = :id";
+					$stmt = $db_conn->prepare($str);
+					$stmt->bindParam(":id", $args[0]);
+				} else if (isset($args[0]) && ($args[0] == "max-weight")) { // If we're returning delivery options within a max weight
+					if (isset($args[1]) && is_numeric($args[1])) { // If the max weight is specified
+						$str .= " WHERE `max_weight` >= :maxWeight";
+						$stmt = $db_conn->prepare($str);
+						$stmt->bindParam(":maxWeight", $args[1]);
+					} else { // If the max weight isn't specified
+						$this->statusCode = 404;
+						break;
+					}
+				} else { // If anything else is provided, simply return all of the delivery options
+					$stmt = $db_conn->prepare($str); // Don't a
+				}
+				
+				$stmt->execute();
+				$this->resp['data'] = $stmt->fetchAll(PDO::FETCH_ASSOC); // Return the results
+				// </editor-fold>
+				break;
+			
+			default:
+				$this->statusCode = 405;
+		}
+		// </editor-fold>
+	}
 }
