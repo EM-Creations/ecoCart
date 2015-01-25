@@ -156,10 +156,6 @@ section#item { /* Focussed item's display section */
 	padding: 1%;
 }
 
-section#item>img#main {
-	
-}
-
 section#item>header {
 	font-weight: bold;
 }
@@ -169,6 +165,14 @@ section#item>div.price {
 	font-weight: bold;
 }
 
+.add-to-basket {
+	background-color: #ffe939;
+	border-radius: 3px;
+	margin: 1% 0;
+	padding: 0.5% 1%;
+}
+
+/* Links */
 .link {
 	color: #00248F;
 	text-decoration: none;
