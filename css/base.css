@@ -106,7 +106,7 @@ main {
 	margin: 0 8% 1% 8%;
 }
 
-main>section#featured>header, main>section#products>header, main>section#basket>header {
+main>section#featured>header, main>section#products>header, main>section#basket>header, main>section#order>header {
 	font-size: 18pt;
 	font-weight: bold;
 	margin-bottom: 1%;
@@ -150,7 +150,7 @@ main>nav#catHierarchy {
 }
 
 /* Item */
-section#item, section#basket { /* Focussed item's display section */
+section#item, section#basket, section#order { /* Focussed item's display section */
 	float: left;
 	margin: 0 2%;
 	box-shadow: 0 3px 3px #888888;
@@ -192,6 +192,15 @@ table#basket>tr.otherRow {
 
 table#basket>tr#total>td {
 	font-weight: bold;
+}
+
+/* Place Order */
+section#order>div>div#orderTotal {
+	font-weight: bold;
+}
+
+section#order>div>button#complete-order {
+	float: right;
 }
 
 /* Links */

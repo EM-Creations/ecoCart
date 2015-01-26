@@ -141,7 +141,7 @@ class Main extends API {
 					$stmt->bindParam(":id", $args[0]);
 				} else if (isset($args[0]) && ($args[0] == "max-weight")) { // If we're returning delivery options within a max weight
 					if (isset($args[1]) && is_numeric($args[1])) { // If the max weight is specified
-						$str .= " WHERE `max_weight` >= :maxWeight";
+						$str .= " WHERE `max_weight` >= :maxWeight ORDER BY `eco_rating` DESC";
 						$stmt = $db_conn->prepare($str);
 						$stmt->bindParam(":maxWeight", $args[1]);
 					} else { // If the max weight isn't specified
