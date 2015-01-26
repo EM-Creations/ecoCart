@@ -195,8 +195,13 @@ table#basket>tr#total>td {
 }
 
 /* Place Order */
-section#order>div>div#orderTotal {
+section#order>div>div#orderSubTotal {
 	font-weight: bold;
+}
+
+section#order>div>div#order-total {
+	float: right;
+	color: #57d94e;
 }
 
 section#order>div>button#complete-order {
