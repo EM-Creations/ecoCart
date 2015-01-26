@@ -125,6 +125,12 @@ class Main extends API {
 		// </editor-fold>
 	}
 	
+	/**
+	 * Delivery end point
+	 * 
+	 * @global PDO $db_conn
+	 * @param array $args
+	 */
 	protected function delivery($args) {
 		// <editor-fold defaultstate="collapsed" desc="delivery">
 		global $db_conn;
@@ -154,6 +160,92 @@ class Main extends API {
 				
 				$stmt->execute();
 				$this->resp['data'] = $stmt->fetchAll(PDO::FETCH_ASSOC); // Return the results
+				// </editor-fold>
+				break;
+			
+			default:
+				$this->statusCode = 405;
+		}
+		// </editor-fold>
+	}
+	
+	/**
+	 * Order end point
+	 * 
+	 * @global PDO $db_conn
+	 * @param array $args
+	 */
+	protected function order($args) {
+		// <editor-fold defaultstate="collapsed" desc="order">
+		global $db_conn;
+		
+		switch ($this->method) {
+			case "POST":
+				// <editor-fold defaultstate="collapsed" desc="POST">
+				$stmt = null;
+				$str = "INSERT INTO `order` (`title`, `first_name`, `last_name`, `address_1`, `address_2`, `post_code`, `delivery`, `created`) VALUES (:title, :fName, :lName, :address1, :address2, :postCode, :delivery, UNIX_TIMESTAMP())";
+				
+				// TODO: Validate these inputs
+				$title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
+				$fName = filter_input(INPUT_POST, 'fName', FILTER_SANITIZE_STRING);
+				$lName = filter_input(INPUT_POST, 'lName', FILTER_SANITIZE_STRING);
+				$address1 = filter_input(INPUT_POST, 'address1', FILTER_SANITIZE_STRING);
+				$address2 = filter_input(INPUT_POST, 'address2', FILTER_SANITIZE_STRING);
+				$postCode = filter_input(INPUT_POST, 'postCode', FILTER_SANITIZE_STRING);
+				$delivery = filter_input(INPUT_POST, 'deliveryOption', FILTER_SANITIZE_STRING);
+				
+				$stmt = $db_conn->prepare($str);
+				$stmt->bindParam("title", $title);
+				$stmt->bindParam("fName", $fName);
+				$stmt->bindParam("lName", $lName);
+				$stmt->bindParam("address1", $address1);
+				$stmt->bindParam("address2", $address2);
+				$stmt->bindParam("postCode", $postCode);
+				$stmt->bindParam("delivery", $delivery);
+				
+				
+				$stmt->execute();
+				$this->resp['data'] = $db_conn->lastInsertID(); // Return the ID of the created order, to be subsequently used
+				// </editor-fold>
+				break;
+			
+			default:
+				$this->statusCode = 405;
+		}
+		// </editor-fold>
+	}
+	
+	/**
+	 * Order Item end point
+	 * 
+	 * @global PDO $db_conn
+	 * @param array $args
+	 */
+	protected function orderItem($args) {
+		// <editor-fold defaultstate="collapsed" desc="order item">
+		global $db_conn;
+		
+		switch ($this->method) {
+			case "POST":
+				// <editor-fold defaultstate="collapsed" desc="POST">
+				if (isset($args[0]) && is_numeric($args[0])) { // If the order ID is set
+					$stmt = null;
+					$str = "INSERT INTO `order_item` (`order_id`, `item_id`, `quantity`) VALUES (:order, :item, :qty)";
+
+					// TODO: Validate these inputs
+					$orderID = $args[0];
+					$item = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+					$qty = filter_input(INPUT_POST, 'qty', FILTER_SANITIZE_NUMBER_INT);
+
+					$stmt = $db_conn->prepare($str);
+					$stmt->bindParam("order", $orderID);
+					$stmt->bindParam("item", $item);
+					$stmt->bindParam("qty", $qty);
+
+					$stmt->execute();
+				} else { // If the ID of the order isn't set
+					$this->statusCode = 404;
+				}
 				// </editor-fold>
 				break;
 			

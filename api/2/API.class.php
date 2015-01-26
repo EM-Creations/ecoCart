@@ -46,9 +46,8 @@ abstract class API {
 	public function __construct() {
 		// <editor-fold defaultstate="collapsed" desc="Constructor">
 		// Set headers
-		header("Access-Control-Allow-Orgin: *");
+		header("Access-Control-Allow-Origin: *");
 		header("Access-Control-Allow-Methods: *");
-		header("Content-Type: application/json");
 
 		$rawPath = filter_input(INPUT_SERVER, "PATH_INFO", FILTER_SANITIZE_STRING); // Get the raw path info variable
 		$this->args = explode('/', trim($rawPath, '/')); // Set the arguments
@@ -71,7 +70,8 @@ abstract class API {
 		}
 		
 		$this->resp['error'] = "Endpoint does not exist: $this->endPoint";
-		return $this->_response(404);
+		$this->statusCode = 404;
+		return $this->_response();
 		// </editor-fold>
 	}
 
