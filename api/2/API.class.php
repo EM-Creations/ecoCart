@@ -82,7 +82,7 @@ abstract class API {
 	 */
 	private function _response() {
 		// <editor-fold defaultstate="collapsed" desc="__response">
-		header("HTTP/1.1 " . $this->statusCode . " " . $this->_requestStatus($this->statusCode));
+		header("HTTP/1.1 " . $this->statusCode . " " . self::_requestStatus($this->statusCode));
 		return json_encode($this->resp);
 		// </editor-fold>
 	}
@@ -93,7 +93,7 @@ abstract class API {
 	 * @param int $code
 	 * @return string
 	 */
-	private function _requestStatus($code) {
+	public static function _requestStatus($code) {
 		// <editor-fold defaultstate="collapsed" desc="__requestStatus">
 		$status = [
 			200 => "OK",
@@ -103,5 +103,14 @@ abstract class API {
 		];
 		return ($status[$code]) ? $status[$code] : $status[500];
 		// </editor-fold>
+	}
+	
+	/**
+	 * Static function to set the HTTP header
+	 * 
+	 * @param int $statusCode
+	 */
+	public static function outputStatus($statusCode = 500) {
+		header("HTTP/1.1 " . $statusCode . " " . self::_requestStatus($statusCode));
 	}
 }

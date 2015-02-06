@@ -1,6 +1,10 @@
 <?php
 /**
- * Author: Edward McKnight (UP608985)
+ * config_sample.inc.php
+ * Sample configuration file
+ * Follow the instructions below to edit this file then rename it to: "config.inc.php"
+ * 
+ * Author: UP608985
  */
 
 /*
