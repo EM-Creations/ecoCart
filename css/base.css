@@ -1,6 +1,6 @@
 /* 
     Created on : 08-Nov-2014, 11:55:08
-    Author     : Edward McKnight (UP608985)
+    Author     : UP608985
 */
 
 @import url(//fonts.googleapis.com/css?family=Roboto:400italic,700,400); /* Google's Roboto Font */
@@ -16,6 +16,11 @@ button {
 	border-radius: 3px;
 	margin: 0 1%;
 	padding: 0.5% 1%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
 div#container {
@@ -92,6 +97,7 @@ aside#catNav>nav>ul {
 }
 
 aside#catNav>nav>ul>li {
+    margin-bottom: 8%;
 	list-style: none;
 	font-weight: bold;
 	overflow-x: hidden;
@@ -113,7 +119,7 @@ main>section#featured>header, main>section#products>header, main>section#basket>
 }
 
 /* Grid styling */
-main div.grid {
+main div.grid, main div.admin-grid {
 	width: 100%;
 }
 
@@ -133,7 +139,7 @@ main div.grid>section.grid-item>img {
 	height: 100%;
 }
 
-main div.grid>section.grid-item>header {
+main div.grid>section.grid-item>header, main div.admin-grid>section.grid-item>header {
 	text-align: center;
 	font-weight: bold;
 }

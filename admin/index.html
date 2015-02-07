@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>ecoCart: Admin</title>
+		<meta name="description" content="ecoCart Admin area">
+		<meta name="author" content="UP608985">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> <!-- Mobile specific meta tag -->
+		<script type="text/javascript" src="../lib/Logger.class.js"></script> <!-- Logger class JavaScript File -->
+		<script type="text/javascript" src="../lib/xhr.js"></script> <!-- XHR JavaScript File -->
+		<script type="text/javascript" src="../lib/animations.js"></script> <!-- Animations JavaScript File -->
+		<script type="text/javascript" src="../lib/admin_setup.js"></script> <!-- Setup JavaScript File -->
+        <link rel="stylesheet" href="../css/admin.css">
+		<link rel="stylesheet" href="../css/base.css">
+		<!-- Favicons -->
+		<link rel="shortcut icon" href="../images/favicon.ico">
+		<!--<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">-->
+    </head>
+    <body>
+		<div id="container">
+			<header id="mainHeader">
+                <div id="headerText">
+                    Admin
+                </div>
+				<div id="headerRight">
+                    <span class="link"><a href="../">Shop</a></span>
+					<span id="last" class="link">Reporting</span>
+				</div>
+			</header>
+			<aside id="catNav">
+				<nav>
+					<ul>
+                        <li><a href="#" class="link">Categories</a></li>
+                        <li><a href="#" class="link">Products</a></li>
+                        <li><a href="#" class="link">Delivery Options</a></li>
+					</ul>
+				</nav>
+			</aside>
+			<main>
+				<section id="options">
+					<header>Options</header>
+					<div class="admin-grid">
+						<section class="grid-item">
+							<header class="link">Categories</header>
+						</section>
+                        <section class="grid-item">
+							<header class="link">Products</header>
+						</section>
+                        <section class="grid-item">
+							<header class="link">Delivery Options</header>
+						</section>
+                        <section class="grid-item">
+							<header class="link">Settings</header>
+						</section>
+					</div>
+				</section>
+			</main>
+			<footer>
+				&copy; <span id="date"></span> ecoCart
+			</footer>
+		</div>
+    </body>
+</html>
