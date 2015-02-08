@@ -1,0 +1,115 @@
+/* 
+    Created on : 08-Feb-2015, 12:37:55
+    Author     : UP608985
+    
+    Style sheet specific to the shop
+*/
+
+/* Header */
+header#mainHeader>canvas#headerLogo {
+    float: left;
+    width: 150px;
+    height: 75px;
+    cursor: pointer;
+}
+
+/* Header search styling */
+header#mainHeader>div#headerSearch {
+    margin-left: 12%;
+}
+
+header#mainHeader>div#headerSearch input {
+    width: 60%;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+header#mainHeader>div#headerSearch button {
+    padding: 10px;
+    border-radius: 3px;
+}
+
+/* Main */
+main>section#featured>header, main>section#products>header, main>section#basket>header, main>section#order>header, main>section#confirm>header {
+    font-size: 18pt;
+    font-weight: bold;
+    margin-bottom: 1%;
+}
+
+/* Grid */
+main div.grid>section.grid-item>div.price {
+    color: #6B6B6B;
+    font-weight: bold;
+}
+
+/* Item */
+section#item, section#basket, section#order, section#confirm { /* Focussed item's display section */
+    float: left;
+    margin: 0 2%;
+    box-shadow: 0 3px 3px #888888;
+    border: 1px solid #D6D6D6;
+    width: 100%;
+    min-width: 200px; /* Set a minimum width so that they move down the screen rather than getting inifinitely smaller, when the screen is squashed */
+    padding: 1%;
+}
+
+section#item>header {
+    font-weight: bold;
+}
+
+section#item>div.price {
+    color: #6B6B6B;
+    font-weight: bold;
+}
+
+.add-to-basket {
+    background-color: #ffe939;
+    border-radius: 3px;
+    margin: 1% 0;
+    padding: 0.5% 1%;
+}
+
+/* Basket */
+table#basket {
+    width: 100%;
+    margin-bottom: 1%;
+}
+
+table#basket>tr#heading {
+    font-weight: bold;
+}
+
+table#basket>tr.otherRow {
+    background-color: #D6D6D6;
+}
+
+table#basket>tr#total>td {
+    font-weight: bold;
+}
+
+/* Place Order */
+section#order>div>div#orderSubTotal {
+    font-weight: bold;
+}
+
+section#order>div>div#order-total {
+    float: right;
+    color: #57d94e;
+}
+
+section#order>div>button#complete-order {
+    float: right;
+}
+
+span#orderID {
+    font-weight: bold;
+}
+
+/* Confirmation Messages */
+div.add-to-basket-confirm, div.complete-order-confirm {
+    position: absolute;
+    z-index: 100;
+    border-radius: 5px;
+    background-color: #00FFCC;
+    padding: 0.5%;
+}

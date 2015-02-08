@@ -1,6 +1,8 @@
 /* 
     Created on : 08-Nov-2014, 11:55:08
     Author     : UP608985
+
+    Style sheet for shared styles
 */
 
 @import url(//fonts.googleapis.com/css?family=Roboto:400italic,700,400); /* Google's Roboto Font */
@@ -30,29 +32,6 @@ div#container {
 header#mainHeader {
     padding: 20px 1.5% 10px 1.5%;
     box-shadow: 0 3px 3px #888888;
-}
-
-header#mainHeader>canvas#headerLogo {
-    float: left;
-    width: 150px;
-    height: 75px;
-    cursor: pointer;
-}
-
-/* Header search styling */
-header#mainHeader>div#headerSearch {
-    margin-left: 12%;
-}
-
-header#mainHeader>div#headerSearch input {
-    width: 60%;
-    padding: 10px;
-    border-radius: 3px;
-}
-
-header#mainHeader>div#headerSearch button {
-    padding: 10px;
-    border-radius: 3px;
 }
 
 header#mainHeader>div#headerRight {
@@ -112,12 +91,6 @@ main {
     margin: 0 8% 1% 8%;
 }
 
-main>section#featured>header, main>section#products>header, main>section#basket>header, main>section#order>header, main>section#confirm>header {
-    font-size: 18pt;
-    font-weight: bold;
-    margin-bottom: 1%;
-}
-
 /* Grid styling */
 main div.grid, main div.admin-grid {
     width: 100%;
@@ -144,78 +117,10 @@ main div.grid>section.grid-item>header, main div.admin-grid>section.grid-item>he
     font-weight: bold;
 }
 
-main div.grid>section.grid-item>div.price {
-    color: #6B6B6B;
-    font-weight: bold;
-}
-
 /* View item pages */
 main>nav#catHierarchy {
     margin: 0 2% 1% 2%;
     color: #999999;
-}
-
-/* Item */
-section#item, section#basket, section#order, section#confirm { /* Focussed item's display section */
-    float: left;
-    margin: 0 2%;
-    box-shadow: 0 3px 3px #888888;
-    border: 1px solid #D6D6D6;
-    width: 100%;
-    min-width: 200px; /* Set a minimum width so that they move down the screen rather than getting inifinitely smaller, when the screen is squashed */
-    padding: 1%;
-}
-
-section#item>header {
-    font-weight: bold;
-}
-
-section#item>div.price {
-    color: #6B6B6B;
-    font-weight: bold;
-}
-
-.add-to-basket {
-    background-color: #ffe939;
-    border-radius: 3px;
-    margin: 1% 0;
-    padding: 0.5% 1%;
-}
-
-/* Basket */
-table#basket {
-    width: 100%;
-    margin-bottom: 1%;
-}
-
-table#basket>tr#heading {
-    font-weight: bold;
-}
-
-table#basket>tr.otherRow {
-    background-color: #D6D6D6;
-}
-
-table#basket>tr#total>td {
-    font-weight: bold;
-}
-
-/* Place Order */
-section#order>div>div#orderSubTotal {
-    font-weight: bold;
-}
-
-section#order>div>div#order-total {
-    float: right;
-    color: #57d94e;
-}
-
-section#order>div>button#complete-order {
-    float: right;
-}
-
-span#orderID {
-    font-weight: bold;
 }
 
 /* Links */
@@ -235,15 +140,6 @@ footer {
     padding-top: 1%;
     box-shadow: 0 -2px 3px #888888;
     text-align: center;
-}
-
-/* Confirmation Messages */
-div.add-to-basket-confirm, div.complete-order-confirm {
-    position: absolute;
-    z-index: 100;
-    border-radius: 5px;
-    background-color: #00FFCC;
-    padding: 0.5%;
 }
 
 /* Misc */

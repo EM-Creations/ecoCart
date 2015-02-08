@@ -1,8 +1,11 @@
 /* 
     Created on : 07-Feb-2015, 19:24:47
     Author     : UP608985
+
+    Style sheet specific to the admin area
 */
 
+/* Header */
 header#mainHeader {
     min-height: 30px;
 }
@@ -10,13 +13,16 @@ header#mainHeader {
 header#mainHeader>div#headerText {
     float: left;
     width: 150px;
-    height: 75px;
     cursor: pointer;
     font-weight: bold;
     font-size: 14pt;
 }
 
 /* Main */
+main>section {
+    margin-top: 1%;
+}
+
 main>section#options>header {
     font-size: 18pt;
     font-weight: bold;
