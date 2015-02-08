@@ -4,6 +4,7 @@ ecoCart
 Description
 -----------
 **ecoCart** - University WEBSCRP unit coursework.
+
 ecoCart is an "online shopping cart" web application which can be installed  
 and fully managed, as well as maintained by English-speaking businesses worldwide.  
 It includes functionality allowing business owner's customers to browse and search  
