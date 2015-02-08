@@ -61,9 +61,26 @@ class Main extends API {
                 $this->resp['data'] = $stmt->fetchAll(PDO::FETCH_ASSOC); // Return the results
                 // </editor-fold>
                 break;
+                
+            case "POST":
+                // <editor-fold defaultstate="collapsed" desc="POST">
+                $str = "INSERT INTO `categories` (`name`, `parent_id`) VALUES (:name, :parent)";
+
+                // TODO: Validate these inputs
+                $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+                $parent = filter_input(INPUT_POST, 'parent', FILTER_SANITIZE_NUMBER_INT);
+
+                $stmt = $db_conn->prepare($str);
+                $stmt->bindParam("name", $name);
+                $stmt->bindParam("parent", $parent, PDO::PARAM_INT);
+
+                $stmt->execute();
+                $this->resp['data'] = $db_conn->lastInsertID(); // Return the ID of the category
+                // </editor-fold>
+                break;
 
             default:
-                $this->statusCode = 405;
+                $this->statusCode = 405; // Method not allowed
         }
         // </editor-fold>
     }
