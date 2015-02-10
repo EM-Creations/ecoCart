@@ -92,12 +92,12 @@ section#order>div>div#orderSubTotal {
     font-weight: bold;
 }
 
-section#order>div>div#order-total {
+section#order>div>form>div#order-total {
     float: right;
     color: #57d94e;
 }
 
-section#order>div>button#complete-order {
+section#order>div>form>button#complete-order {
     float: right;
 }
 
