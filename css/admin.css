@@ -61,3 +61,8 @@ form#add-category>select, form#add-category>input {
     display: block;
     margin-bottom: 1%;
 }
+
+/* Tables */
+table#catTable {
+    width: 100%;
+}

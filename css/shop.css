@@ -75,10 +75,6 @@ table#basket {
     margin-bottom: 1%;
 }
 
-table#basket>tr#heading {
-    font-weight: bold;
-}
-
 table#basket>tr.otherRow {
     background-color: #D6D6D6;
 }

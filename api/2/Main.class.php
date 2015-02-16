@@ -78,6 +78,20 @@ class Main extends API {
                 $this->resp['data'] = $db_conn->lastInsertID(); // Return the ID of the category
                 // </editor-fold>
                 break;
+            
+            case "DELETE":
+                // <editor-fold defaultstate="collapsed" desc="DELETE">
+                $stmt = null;
+
+                if (isset($args[0]) && is_numeric($args[0])) { // If we're deleting a specific category
+                    $stmt = $db_conn->prepare("DELETE FROM `category` WHERE `id` = :catID");
+                    $stmt->bindParam(":catID", $args[0]);
+                }
+
+                $stmt->execute();
+                $this->resp['data'] = "Deleted";
+                // </editor-fold>
+                break;
 
             default:
                 $this->statusCode = 405; // Method not allowed

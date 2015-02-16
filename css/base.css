@@ -134,6 +134,11 @@ main>nav#catHierarchy {
     color: #CCCC00;
 }
 
+/* Tables */
+table>tr.heading, table>tr#heading {
+    font-weight: bold;
+}
+
 /* Errors */
 input:invalid,
 input:out-of-range {
