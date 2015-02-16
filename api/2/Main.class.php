@@ -64,7 +64,7 @@ class Main extends API {
                 
             case "POST":
                 // <editor-fold defaultstate="collapsed" desc="POST">
-                $str = "INSERT INTO `categories` (`name`, `parent_id`) VALUES (:name, :parent)";
+                $str = "INSERT INTO `category` (`name`, `parent_id`) VALUES (:name, :parent)";
 
                 // TODO: Validate these inputs
                 $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);

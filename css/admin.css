@@ -23,10 +23,25 @@ main>section {
     margin-top: 1%;
 }
 
-main>section#options>header {
+/* Sections */
+main>section#options>header, main>section#categories>header {
     font-size: 18pt;
     font-weight: bold;
     margin-bottom: 1%;
+}
+
+section#categories { /* Focussed display sections */
+    float: left;
+    margin: 2%;
+    box-shadow: 0 3px 3px #888888;
+    border: 1px solid #D6D6D6;
+    width: 100%;
+    min-width: 200px; /* Set a minimum width so that they move down the screen rather than getting inifinitely smaller, when the screen is squashed */
+    padding: 1%;
+}
+
+section#categories>fieldset>legend {
+    font-weight: bold;
 }
 
 /* Admin Grid styling */
@@ -39,4 +54,10 @@ main div.admin-grid>section.grid-item {
     width: 20%;
     min-width: 100px; /* Set a minimum width so that they move down the screen rather than getting inifinitely smaller, when the screen is squashed */
     padding: 1%;
+}
+
+/* Forms */
+form#add-category>select, form#add-category>input {
+    display: block;
+    margin-bottom: 1%;
 }

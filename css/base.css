@@ -150,6 +150,10 @@ footer {
 }
 
 /* Misc */
+label {
+    font-weight: bold;
+}
+
 body>div#modalHider { /* sadasidha. (2012). Show a div as a modal pop up. Retrieved from http://stackoverflow.com/questions/6263303/show-a-div-as-a-modal-pop-up */
     position: absolute;
     top: 0%;
