@@ -79,6 +79,29 @@ class Main extends API {
                 // </editor-fold>
                 break;
             
+            case "PUT":
+                // <editor-fold defaultstate="collapsed" desc="PUT">
+                $stmt = null;
+                
+                if (isset($args[0]) && is_numeric($args[0])) { // If we're updating a specific category
+                    $str = "UPDATE `category` SET `name` = :name, `parent_id` = :parent WHERE `id` = :id";
+                    
+                    // TODO: Validate category PUT inputs
+                    $id = $args[0];
+                    $name = $args[1];
+                    $parent = $args[2];
+                    
+                    $stmt = $db_conn->prepare($str);
+                    $stmt->bindParam('id', $id, PDO::PARAM_INT);
+                    $stmt->bindParam('name', $name);
+                    $stmt->bindParam('parent', $parent, PDO::PARAM_INT);
+                }
+                
+                $stmt->execute();
+                $this->resp['data'] = $db_conn->lastInsertID(); // Return the ID of the category
+                // </editor-fold>
+                break;
+            
             case "DELETE":
                 // <editor-fold defaultstate="collapsed" desc="DELETE">
                 $stmt = null;
