@@ -220,7 +220,7 @@ class Main extends API {
                 // </editor-fold>
                 break;
                 
-                case "POST":
+            case "POST":
                 // <editor-fold defaultstate="collapsed" desc="POST">
                 $str = "INSERT INTO `delivery_option` (`name`, `max_weight`, `eco_rating`, `cost`) VALUES (:name, :maxWeight, :ecoRating, :cost)";
 
@@ -229,7 +229,7 @@ class Main extends API {
                 $maxWeight = filter_input(INPUT_POST, 'maxWeight', FILTER_SANITIZE_STRING); // Sanitise as string to stop conversion of double to int
                 $ecoRating = filter_input(INPUT_POST, 'ecoRating', FILTER_SANITIZE_NUMBER_INT);
                 $cost = filter_input(INPUT_POST, 'cost', FILTER_SANITIZE_STRING); // Sanitise as string to stop conversion of double to int
-                
+
                 $stmt = $db_conn->prepare($str);
                 $stmt->bindParam('name', $name);
                 $stmt->bindParam('maxWeight', $maxWeight);
@@ -238,6 +238,20 @@ class Main extends API {
 
                 $stmt->execute();
                 $this->resp['data'] = $db_conn->lastInsertID(); // Return the ID of the category
+                // </editor-fold>
+                break;
+            
+            case "DELETE":
+                // <editor-fold defaultstate="collapsed" desc="DELETE">
+                $stmt = null;
+
+                if (isset($args[0]) && is_numeric($args[0])) { // If we're deleting a specific delivery option
+                    $stmt = $db_conn->prepare("DELETE FROM `delivery_option` WHERE `id` = :id");
+                    $stmt->bindParam(':id', $args[0]);
+                }
+
+                $stmt->execute();
+                $this->resp['data'] = "Deleted";
                 // </editor-fold>
                 break;
 
