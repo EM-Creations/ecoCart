@@ -50,8 +50,7 @@ header#mainHeader>div#headerRight>span.link#last {
 aside#catNav {
     position: absolute;
     float: left;
-    width: 5%;
-    max-height: 600px;
+    width: 175px;
     padding: 2px;
     margin: .7% 0 1% 0;
     background-color: #e5e2d9;
@@ -59,12 +58,6 @@ aside#catNav {
     box-shadow: 3px 3px 2px #888888;
     overflow-x: hidden; /* Hide overflowing content when screen size is squashed, stops text flowing over the element */
     overflow-y: hidden;
-    transition: width .5s; /* Transition Effect */
-}
-
-aside#catNav:hover {
-    width: 15%;
-    max-height: none; /* No max height when hovered over */
 }
 
 aside#catNav>nav {
@@ -88,7 +81,6 @@ main {
     display: block; /* Neccessary for older browsers which don't display the "main" element correctly */
     width: 75%;
     min-height: 600px; /* TODO: May have to change this later to be more dynamic */
-    margin: 0 8% 1% 8%;
 }
 
 /* Grid styling */

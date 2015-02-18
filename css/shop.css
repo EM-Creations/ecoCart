@@ -30,6 +30,10 @@ header#mainHeader>div#headerSearch button {
 }
 
 /* Main */
+main {
+    margin: 1% 8% 1% 2%;
+}
+
 main>section#featured>header, main>section#products>header, main>section#basket>header, main>section#order>header, main>section#confirm>header {
     font-size: 18pt;
     font-weight: bold;
