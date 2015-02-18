@@ -63,6 +63,6 @@ form#add-category>select, form#add-category>input, form#add-del>input {
 }
 
 /* Tables */
-table#catTable {
+table#catTable, table#delTable {
     width: 100%;
 }
