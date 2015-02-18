@@ -241,6 +241,33 @@ class Main extends API {
                 // </editor-fold>
                 break;
             
+            case "PUT":
+                // <editor-fold defaultstate="collapsed" desc="PUT">
+                $stmt = null;
+                
+                if (isset($args[0]) && is_numeric($args[0])) { // If we're updating a specific delivery option
+                    $str = "UPDATE `delivery_option` SET `name` = :name, `max_weight` = :maxWeight, `eco_rating` = :ecoRating, `cost` = :cost WHERE `id` = :id";
+                    
+                    // TODO: Validate delivery option PUT inputs
+                    $id = $args[0];
+                    $name = $args[1];
+                    $maxWeight = $args[2];
+                    $ecoRating = $args[3];
+                    $cost = $args[4];
+                    
+                    $stmt = $db_conn->prepare($str);
+                    $stmt->bindParam('id', $id, PDO::PARAM_INT);
+                    $stmt->bindParam('name', $name);
+                    $stmt->bindParam('maxWeight', $maxWeight);
+                    $stmt->bindParam('ecoRating', $ecoRating, PDO::PARAM_INT);
+                    $stmt->bindParam('cost', $cost);
+                }
+                
+                $stmt->execute();
+                $this->resp['data'] = $db_conn->lastInsertID(); // Return the ID of the delivery option
+                // </editor-fold>
+                break;
+            
             case "DELETE":
                 // <editor-fold defaultstate="collapsed" desc="DELETE">
                 $stmt = null;
