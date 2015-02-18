@@ -219,6 +219,27 @@ class Main extends API {
                 $this->resp['data'] = $stmt->fetchAll(PDO::FETCH_ASSOC); // Return the results
                 // </editor-fold>
                 break;
+                
+                case "POST":
+                // <editor-fold defaultstate="collapsed" desc="POST">
+                $str = "INSERT INTO `delivery_option` (`name`, `max_weight`, `eco_rating`, `cost`) VALUES (:name, :maxWeight, :ecoRating, :cost)";
+
+                // TODO: Validate delivery option POST inputs
+                $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+                $maxWeight = filter_input(INPUT_POST, 'maxWeight', FILTER_SANITIZE_STRING); // Sanitise as string to stop conversion of double to int
+                $ecoRating = filter_input(INPUT_POST, 'ecoRating', FILTER_SANITIZE_NUMBER_INT);
+                $cost = filter_input(INPUT_POST, 'cost', FILTER_SANITIZE_STRING); // Sanitise as string to stop conversion of double to int
+                
+                $stmt = $db_conn->prepare($str);
+                $stmt->bindParam('name', $name);
+                $stmt->bindParam('maxWeight', $maxWeight);
+                $stmt->bindParam('ecoRating', $ecoRating, PDO::PARAM_INT);
+                $stmt->bindParam('cost', $cost);
+
+                $stmt->execute();
+                $this->resp['data'] = $db_conn->lastInsertID(); // Return the ID of the category
+                // </editor-fold>
+                break;
 
             default:
                 $this->statusCode = 405;

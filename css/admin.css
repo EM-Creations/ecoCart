@@ -57,7 +57,7 @@ main div.admin-grid>section.grid-item {
 }
 
 /* Forms */
-form#add-category>select, form#add-category>input {
+form#add-category>select, form#add-category>input, form#add-del>input {
     display: block;
     margin-bottom: 1%;
 }
