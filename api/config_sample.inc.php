@@ -1,5 +1,4 @@
 <?php
-
 /**
  * config_sample.inc.php
  * Sample configuration file
@@ -7,8 +6,9 @@
  * 
  * Author: UP608985
  */
+
 /*
- * Only Edit the below constant definitions
+ * Only edit the below constant definitions
  */
 const DB_TYPE = "mysql";
 const DB_HOST = "localhost";
@@ -35,5 +35,7 @@ try { // Try to connect to the database
     // TODO: Modify the line below before completion
     $db_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Set the error mode to exception FOR DEV ONLY!
 } catch (PDOException $pdoE) { // If an exception was caught
-    print("DATABASE CONNECTION ERROR: " . $pdoE->getMessage()); // Output the exception's message
+	API::outputStatus(500); // Internal Server Error (500)
+    print(json_encode(["errorMsg"=>"Could not connect to database." , "errorDetails"=>$pdoE->getMessage(), "errorCode"=>11])); // Output the exception's message
+	exit; // Kill the script at this point
 }

@@ -14,7 +14,7 @@ if (file_exists($configFile)) { // If the configuration file exists
     require($configFile); // Require the database configuration file
 } else { // If the configuration file does not exist
     API::outputStatus(500); // Internal Server Error (500)
-    print(json_encode(['error' => "Database configuration file does not exist. Please make sure you've edited 'config_sample.inc.php' and renamed it to 'config.inc.php'."]));
+    print(json_encode(['errorMsg' => "Database configuration file does not exist. Please make sure you've edited 'config_sample.inc.php' and renamed it to 'config.inc.php'."]));
     exit; // Kill the script
 }
 
