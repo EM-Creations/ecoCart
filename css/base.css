@@ -48,7 +48,6 @@ header#mainHeader>div#headerRight>span.link#last {
 
 /* Category Navigation */
 aside#catNav {
-    position: absolute;
     float: left;
     width: 175px;
     padding: 2px;
@@ -77,8 +76,8 @@ aside#catNav>nav>ul>li {
 
 /* Main content styling */
 main {
-    float: left;
     display: block; /* Neccessary for older browsers which don't display the "main" element correctly */
+	margin: 1% 8% 1% 13%;
     width: 75%;
     min-height: 600px; /* TODO: May have to change this later to be more dynamic */
 }

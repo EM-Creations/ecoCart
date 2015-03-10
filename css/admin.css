@@ -18,11 +18,6 @@ header#mainHeader>div#headerText {
     font-size: 14pt;
 }
 
-/* Main */
-main {
-    margin: 1% 8% 1% 13%; /* Different margin style for admin side */
-}
-
 main>section {
     margin-top: 1%;
 }
