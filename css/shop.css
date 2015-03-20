@@ -18,17 +18,6 @@ header#mainHeader>div#headerSearch {
     margin-left: 12%;
 }
 
-header#mainHeader>div#headerSearch input {
-    width: 60%;
-    padding: 10px;
-    border-radius: 3px;
-}
-
-header#mainHeader>div#headerSearch button {
-    padding: 10px;
-    border-radius: 3px;
-}
-
 /* Main */
 main>section#featured>header, main>section#products>header, main>section#basket>header, main>section#order>header, main>section#confirm>header {
     font-size: 18pt;
@@ -71,6 +60,7 @@ section#item>div.price {
 
 /* Basket */
 table#basket {
+	border-collapse: collapse;
     width: 100%;
     margin-bottom: 1%;
 }
