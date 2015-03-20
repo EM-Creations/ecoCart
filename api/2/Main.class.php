@@ -107,6 +107,11 @@ class Main extends API {
                 $stmt = null;
 
                 if (isset($args[0]) && is_numeric($args[0])) { // If we're deleting a specific category
+					// Update categories that were using the category to be deleted as their parent
+					$updateStmt = $db_conn->prepare("UPDATE `category` SET `parent_id` = 0 WHERE `parent_id` = :catID");
+					$updateStmt->bindParam(":catID", $args[0]);
+					$updateStmt->execute(); // Run the update statement
+					
                     $stmt = $db_conn->prepare("DELETE FROM `category` WHERE `id` = :catID");
                     $stmt->bindParam(":catID", $args[0]);
                 }
