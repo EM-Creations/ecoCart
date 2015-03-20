@@ -23,13 +23,13 @@ main>section {
 }
 
 /* Sections */
-main>section#options>header, main>section#categories>header {
+main>section#options>header, main>section#categories>header, main>section#delivery-opts>header, main>section#products>header {
     font-size: 18pt;
     font-weight: bold;
     margin-bottom: 1%;
 }
 
-section#categories { /* Focussed display sections */
+section#categories, section#products, section#delivery-opts { /* Focussed display sections */
     float: left;
     margin: 2%;
     box-shadow: 0 3px 3px #888888;
@@ -39,7 +39,7 @@ section#categories { /* Focussed display sections */
     padding: 1%;
 }
 
-section#categories>fieldset>legend {
+fieldset>legend {
     font-weight: bold;
 }
 
@@ -62,11 +62,17 @@ form#add-category>select, form#add-category>input, form#add-del>input {
 }
 
 /* Tables */
-table#catTable, table#delTable {
+table#catTable, table#delTable, table#productsTable {
+	border-collapse: collapse;
+	margin-top: 1%;
     width: 100%;
+}
+
+table#catTable tr:nth-child(even), table#delTable tr:nth-child(even), table#productsTable tr:nth-child(even) {
+	background-color: #D6D6D6;
 }
 
 /* Misc */
 fieldset {
-    margin-bottom: 2%;
+    margin: 1% 0;
 }

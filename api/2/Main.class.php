@@ -179,6 +179,25 @@ class Main extends API {
                 $this->resp['data'] = $stmt->fetchAll(PDO::FETCH_ASSOC); // Return the results
                 // </editor-fold>
                 break;
+				
+			case "DELETE":
+                // <editor-fold defaultstate="collapsed" desc="DELETE">
+                $stmt = null;
+				
+                if (isset($args[0]) && is_numeric($args[0])) { // If we're deleting a specific item
+					// Delete images for this item
+					$imagesStmt = $db_conn->prepare("DELETE FROM `item_image` WHERE `item_id` = :prodID");
+					$imagesStmt->bindParam(":prodID", $args[0]);
+					$imagesStmt->execute();
+					
+                    $stmt = $db_conn->prepare("DELETE FROM `item` WHERE `id` = :prodID");
+                    $stmt->bindParam(":prodID", $args[0]);
+                }
+
+                $stmt->execute();
+                $this->resp['data'] = "Deleted";
+                // </editor-fold>
+                break;
 
             default:
                 $this->statusCode = 405;

@@ -146,6 +146,12 @@ footer {
 }
 
 /* Misc */
+input.search-field {
+    width: 60%;
+    padding: 10px;
+    border-radius: 3px;
+}
+
 label {
     font-weight: bold;
 }
