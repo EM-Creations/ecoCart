@@ -179,6 +179,53 @@ class Main extends API {
                 $this->resp['data'] = $stmt->fetchAll(PDO::FETCH_ASSOC); // Return the results
                 // </editor-fold>
                 break;
+                
+            case "POST":
+                // <editor-fold defaultstate="collapsed" desc="POST">              
+                $str = "INSERT INTO `item` (`name`, `cat`, `description`, `weight`, `featured`, `price`, `stock`) VALUES (:name, :category, :description, :weight, :featured, :price, :stock)";
+
+                // TODO: Validate these inputs
+                $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+                $category = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_NUMBER_INT);
+                $description = filter_input(INPUT_POST, 'desc', FILTER_SANITIZE_STRING);
+                $weight = filter_input(INPUT_POST, 'weight', FILTER_SANITIZE_NUMBER_FLOAT);
+                $featured = filter_input(INPUT_POST, 'featured', FILTER_SANITIZE_NUMBER_INT);
+                $price = filter_input(INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_FLOAT);
+                $stock = filter_input(INPUT_POST, 'stock', FILTER_SANITIZE_NUMBER_INT);
+
+                $stmt = $db_conn->prepare($str);
+                $stmt->bindParam("name", $name);
+                $stmt->bindParam("category", $category);
+                $stmt->bindParam("description", $description);
+                $stmt->bindParam("weight", $weight);
+                $stmt->bindParam("featured", $featured);
+                $stmt->bindParam("price", $price);
+                $stmt->bindParam("stock", $stock);
+
+                $stmt->execute(); // Add the item entry
+                $newItemID = $db_conn->lastInsertID();
+                
+                $imageUploadsDir = __DIR__ . "/../../images/products";
+                
+//                print("POST:<br /><br />");
+//                print_r($_POST);
+//                print("FILES:<br /><br />");
+//                print_r($_FILES);
+                
+                $fileName = $_FILES['image']['name'];
+                $tmpFile = $_FILES['image']['tmp_name'];
+                move_uploaded_file($tmpFile, $imageUploadsDir . "/" . $fileName);
+                
+                $imgStr = "INSERT INTO `item_image` (`item_id`, `image`, `main`) VALUES (:itemID, :image, 1)";
+                $imgStmt = $db_conn->prepare($imgStr);
+                $imgStmt->bindParam("itemID", $newItemID);
+                $imgStmt->bindParam("image", $fileName);
+                
+                $imgStmt->execute(); // Add the item_image entry
+                
+                $this->resp['data'] = $newItemID; // Return the ID of the created item
+                // </editor-fold>
+                break;
 				
 			case "DELETE":
                 // <editor-fold defaultstate="collapsed" desc="DELETE">
