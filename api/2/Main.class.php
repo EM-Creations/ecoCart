@@ -137,6 +137,7 @@ class Main extends API {
     {
         // <editor-fold defaultstate="collapsed" desc="item">
         global $db_conn;
+        $imageUploadsDir = __DIR__ . "/../../images/products";
 
         switch ($this->method) {
             case "GET":
@@ -188,9 +189,9 @@ class Main extends API {
                 $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
                 $category = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_NUMBER_INT);
                 $description = filter_input(INPUT_POST, 'desc', FILTER_SANITIZE_STRING);
-                $weight = filter_input(INPUT_POST, 'weight', FILTER_SANITIZE_NUMBER_FLOAT);
+                $weight = filter_input(INPUT_POST, 'weight', FILTER_SANITIZE_STRING); // Sanitise as string to stop conversion of double to int
                 $featured = filter_input(INPUT_POST, 'featured', FILTER_SANITIZE_NUMBER_INT);
-                $price = filter_input(INPUT_POST, 'price', FILTER_SANITIZE_NUMBER_FLOAT);
+                $price = filter_input(INPUT_POST, 'price', FILTER_SANITIZE_STRING); // Sanitise as string to stop conversion of double to int
                 $stock = filter_input(INPUT_POST, 'stock', FILTER_SANITIZE_NUMBER_INT);
 
                 $stmt = $db_conn->prepare($str);
@@ -205,13 +206,12 @@ class Main extends API {
                 $stmt->execute(); // Add the item entry
                 $newItemID = $db_conn->lastInsertID();
                 
-                $imageUploadsDir = __DIR__ . "/../../images/products";
-                
 //                print("POST:<br /><br />");
 //                print_r($_POST);
 //                print("FILES:<br /><br />");
 //                print_r($_FILES);
                 
+                // Move the uploaded file
                 $fileName = $_FILES['image']['name'];
                 $tmpFile = $_FILES['image']['tmp_name'];
                 move_uploaded_file($tmpFile, $imageUploadsDir . "/" . $fileName);
@@ -232,10 +232,20 @@ class Main extends API {
                 $stmt = null;
 				
                 if (isset($args[0]) && is_numeric($args[0])) { // If we're deleting a specific item
+                    // Get the item image names, so we can delete them
+                    $imagesStmt = $db_conn->prepare("SELECT `image` FROM `item_image` WHERE `item_id` = :prodID");
+                    $imagesStmt->bindParam(":prodID", $args[0]);
+                    if ($imagesStmt->execute()) { // If the statement succeeded
+                        while ($row = $imagesStmt->fetch(PDO::FETCH_ASSOC)) { // For each statement
+                            $imageName = $row['image'];
+                            unlink($imageUploadsDir . "/" . $imageName); // Delete the file
+                        }
+                    }
+                    
 					// Delete images for this item
-					$imagesStmt = $db_conn->prepare("DELETE FROM `item_image` WHERE `item_id` = :prodID");
-					$imagesStmt->bindParam(":prodID", $args[0]);
-					$imagesStmt->execute();
+					$imagesDelStmt = $db_conn->prepare("DELETE FROM `item_image` WHERE `item_id` = :prodID");
+					$imagesDelStmt->bindParam(":prodID", $args[0]);
+					$imagesDelStmt->execute();
 					
                     $stmt = $db_conn->prepare("DELETE FROM `item` WHERE `id` = :prodID");
                     $stmt->bindParam(":prodID", $args[0]);

@@ -99,3 +99,8 @@ div.add-to-basket-confirm, div.complete-order-confirm {
     background-color: #00FFCC;
     padding: 0.5%;
 }
+
+/* Misc */
+img#main {
+    max-width: 100%;
+}
