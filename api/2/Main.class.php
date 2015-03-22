@@ -143,7 +143,7 @@ class Main extends API {
             case "GET":
                 // <editor-fold defaultstate="collapsed" desc="GET">
                 $stmt = null;
-                $str = "SELECT `item`.`id`, `item`.`cat`, `item`.`name`, `item`.`description`, `item`.`weight`, `item`.`price`, `item_image`.`main` as `main_image`, `item_image`.`image`  FROM `item` LEFT JOIN `item_image` ON `item`.`id`=`item_image`.`item_id`";
+                $str = "SELECT `item`.`id`, `item`.`cat`, `item`.`name`, `item`.`description`, `item`.`weight`, `item`.`price`, `item`.`stock`, `item`.`featured`, `item_image`.`main` as `main_image`, `item_image`.`image`  FROM `item` LEFT JOIN `item_image` ON `item`.`id`=`item_image`.`item_id`";
 
                 if (isset($args[0]) && is_numeric($args[0])) { // If we're returning a specific item
                     $str .= " WHERE `id` = :id";
@@ -224,6 +224,74 @@ class Main extends API {
                 $imgStmt->execute(); // Add the item_image entry
                 
                 $this->resp['data'] = $newItemID; // Return the ID of the created item
+                // </editor-fold>
+                break;
+            
+            case "PUT":
+                // <editor-fold defaultstate="collapsed" desc="PUT">
+                $stmt = null;
+                
+                if (isset($args[0]) && is_numeric($args[0])) { // If we're updating a specific item
+                    $str = "UPDATE `item` SET `name` = :name, `cat` = :category, `weight` = :weight, `featured` = :featured, `price` = :price, `stock` = :stock, `description` = :description WHERE `id` = :id";
+                    $putVars = []; // Empty array
+                    Lib::parse_input($putVars); // Parses PUT data into $_POST superglobal
+//                    print_r($putVars);
+                    
+                    // TODO: Validate item PUT inputs
+                    $id = $args[0];
+                    $name = filter_var($putVars['name'], FILTER_SANITIZE_STRING);
+                    $category = filter_var($putVars['category'], FILTER_SANITIZE_NUMBER_INT);
+                    $description = filter_var($putVars['desc'], FILTER_SANITIZE_STRING);
+                    $weight = filter_var($putVars['weight'], FILTER_SANITIZE_STRING); // Sanitise as string to stop conversion of double to int
+                    $featured = filter_var($putVars['featured'], FILTER_SANITIZE_NUMBER_INT);
+                    $price = filter_var($putVars['price'], FILTER_SANITIZE_STRING); // Sanitise as string to stop conversion of double to int
+                    $stock = filter_var($putVars['stock'], FILTER_SANITIZE_NUMBER_INT);
+
+                    $stmt = $db_conn->prepare($str);
+                    $stmt->bindParam("id", $id);
+                    $stmt->bindParam("name", $name);
+                    $stmt->bindParam("category", $category);
+                    $stmt->bindParam("description", $description);
+                    $stmt->bindParam("weight", $weight);
+                    $stmt->bindParam("featured", $featured);
+                    $stmt->bindParam("price", $price);
+                    $stmt->bindParam("stock", $stock);
+
+                    $stmt->execute(); // Modify the item entry
+
+                    // Move the uploaded file
+                    if (sizeof($_FILES) > 0) { // If an image has been provided, update it
+                        //print_r($_FILES); exit;
+                        
+                        $fileName = $_FILES['name'];
+                        $tmpFile = $_FILES['tmp_name'];
+                        if (!move_uploaded_file($tmpFile, $imageUploadsDir . "/" . $fileName)) {
+                            $this->resp['error'] = "Couldn't move uploaded file."; // Return error message
+                            $this->statusCode = 500;
+                            return;
+                        }
+
+                        // Get the item image names, so we can delete them
+                        $imagesStmt = $db_conn->prepare("SELECT `image` FROM `item_image` WHERE `item_id` = :prodID");
+                        $imagesStmt->bindParam(":prodID", $id);
+                        if ($imagesStmt->execute()) { // If the statement succeeded
+                            while ($row = $imagesStmt->fetch(PDO::FETCH_ASSOC)) { // For each statement
+                                $imageName = $row['image'];
+                                unlink($imageUploadsDir . "/" . $imageName); // Delete the file
+                            }
+                        }
+                        
+                        $imgStr = "UPDATE `item_image` SET `image` = :image WHERE `item_id` = :itemID";
+                        $imgStmt = $db_conn->prepare($imgStr);
+                        $imgStmt->bindParam("itemID", $id);
+                        $imgStmt->bindParam("image", $fileName);
+
+                        $imgStmt->execute(); // Add the item_image entry
+                    }
+                }
+                
+                $stmt->execute();
+                $this->resp['data'] = $id; // Return the ID of the item
                 // </editor-fold>
                 break;
 				
