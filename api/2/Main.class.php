@@ -110,9 +110,27 @@ class Main extends API {
                 $stmt = null;
 
                 if (isset($args[0]) && is_numeric($args[0])) { // If we're deleting a specific category
-					// Update categories that were using the category to be deleted as their parent
-					$updateStmt = $db_conn->prepare("UPDATE `category` SET `parent_id` = 0 WHERE `parent_id` = :catID");
-					$updateStmt->bindParam(":catID", $args[0]);
+                    $catID = $args[0];
+                    
+                    // Update items that were using the category to be deleted
+                    $catStmt = $db_conn->prepare("SELECT `parent_id` FROM `category` WHERE `id` = :catID");
+                    $catStmt->bindParam(":catID", $catID);
+                    if ($catStmt->execute()) { // If the statement succeeded
+                        $row = $catStmt->fetch(PDO::FETCH_ASSOC);
+                        $parentID = (int) $row['parent_id'];
+                    } else {
+                        $parentID = 0;
+                    }
+                    
+                    $itemStmt = $db_conn->prepare("UPDATE `item` SET `cat` = :parentID WHERE `cat` = :catID");
+                    $itemStmt->bindParam(":catID", $catID);
+                    $itemStmt->bindParam(":parentID", $parentID);
+                    $itemStmt->execute(); // Update items
+                    
+                    // Update categories that were using the category to be deleted as their parent
+					$updateStmt = $db_conn->prepare("UPDATE `category` SET `parent_id` = :parentID WHERE `parent_id` = :catID");
+					$updateStmt->bindParam(":catID", $catID);
+                    $updateStmt->bindParam(":parentID", $parentID);
 					$updateStmt->execute(); // Run the update statement
 					
                     $stmt = $db_conn->prepare("DELETE FROM `category` WHERE `id` = :catID");
