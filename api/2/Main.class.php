@@ -398,11 +398,14 @@ class Main extends API {
                     $str = "UPDATE `delivery_option` SET `name` = :name, `max_weight` = :maxWeight, `eco_rating` = :ecoRating, `cost` = :cost WHERE `id` = :id";
                     
                     // TODO: Validate delivery option PUT inputs
+                    $putVars = []; // Empty array
+                    Lib::parse_input($putVars); // Parses PUT data into $_POST superglobal
+                    
                     $id = $args[0];
-                    $name = $args[1];
-                    $maxWeight = $args[2];
-                    $ecoRating = $args[3];
-                    $cost = $args[4];
+                    $name = filter_var($putVars['name'], FILTER_SANITIZE_STRING);
+                    $maxWeight = filter_var($putVars['maxWeight'], FILTER_SANITIZE_STRING); // Sanitise as string to stop conversion of double to int
+                    $ecoRating = filter_var($putVars['ecoRating'], FILTER_SANITIZE_NUMBER_INT);
+                    $cost = filter_var($putVars['cost'], FILTER_SANITIZE_STRING); // Sanitise as string to stop conversion of double to int
                     
                     $stmt = $db_conn->prepare($str);
                     $stmt->bindParam('id', $id, PDO::PARAM_INT);
@@ -413,7 +416,7 @@ class Main extends API {
                 }
                 
                 $stmt->execute();
-                $this->resp['data'] = $db_conn->lastInsertID(); // Return the ID of the delivery option
+                $this->resp['data'] = "updated";
                 // </editor-fold>
                 break;
             
