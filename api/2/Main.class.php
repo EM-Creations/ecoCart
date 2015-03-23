@@ -87,9 +87,12 @@ class Main extends API {
                     $str = "UPDATE `category` SET `name` = :name, `parent_id` = :parent WHERE `id` = :id";
                     
                     // TODO: Validate category PUT inputs
+                    $putVars = []; // Empty array
+                    Lib::parse_input($putVars); // Parses PUT data into $_POST superglobal
+                    
                     $id = $args[0];
-                    $name = $args[1];
-                    $parent = $args[2];
+                    $name = filter_var($putVars['name'], FILTER_SANITIZE_STRING);
+                    $parent = filter_var($putVars['parent'], FILTER_SANITIZE_NUMBER_INT);
                     
                     $stmt = $db_conn->prepare($str);
                     $stmt->bindParam('id', $id, PDO::PARAM_INT);
@@ -98,7 +101,7 @@ class Main extends API {
                 }
                 
                 $stmt->execute();
-                $this->resp['data'] = $db_conn->lastInsertID(); // Return the ID of the category
+                $this->resp['data'] = "updated";
                 // </editor-fold>
                 break;
             
