@@ -235,7 +235,8 @@ class Main extends API {
                 // Move the uploaded file
                 $fileName = $_FILES['image']['name'];
                 $tmpFile = $_FILES['image']['tmp_name'];
-                move_uploaded_file($tmpFile, $imageUploadsDir . "/" . $fileName);
+                $dest =  $imageUploadsDir . "/" . $fileName;
+                move_uploaded_file($tmpFile, $dest);
                 
                 $imgStr = "INSERT INTO `item_image` (`item_id`, `image`, `main`) VALUES (:itemID, :image, 1)";
                 $imgStmt = $db_conn->prepare($imgStr);
@@ -286,8 +287,12 @@ class Main extends API {
                         
                         $fileName = $_FILES['name'];
                         $tmpFile = $_FILES['tmp_name'];
-                        if (!move_uploaded_file($tmpFile, $imageUploadsDir . "/" . $fileName)) {
+                        $dest =  $imageUploadsDir . "/" . $fileName;
+                        if (!rename($tmpFile, $dest)) { // Use rename (not move_uploaded_file) due to move_uploaded_file only working with files uploaded through POST
                             $this->resp['error'] = "Couldn't move uploaded file."; // Return error message
+                            $this->resp['name'] = $fileName; // Return error message
+                            $this->resp['tmp'] = $tmpFile; // Return error message
+                            $this->resp['dest'] = $dest; // Return error message
                             $this->statusCode = 500;
                             return;
                         }
