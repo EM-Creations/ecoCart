@@ -541,7 +541,15 @@ class Main extends API {
                     $stmt->bindParam("item", $item);
                     $stmt->bindParam("qty", $qty);
 
-                    $stmt->execute();
+                    if ($stmt->execute()) { // If the insert succeeded
+                        // Update the stock level for this item
+                        $stockStr = "UPDATE `item` SET `stock` = `stock` - :qty WHERE `id` = :item";
+                        $stockStmt = $db_conn->prepare($stockStr);
+                        $stockStmt->bindParam("item", $item);
+                        $stockStmt->bindParam("qty", $qty);
+                        $stockStmt->execute(); // Update the stock
+                    }
+                    
                 } else { // If the ID of the order isn't set
                     $this->statusCode = 404;
                 }
