@@ -1,0 +1,63 @@
+/* 
+    Created on : 07-Feb-2015, 19:24:47
+    Author     : UP608985
+
+    Style sheet specific to the reporting area
+*/
+
+/* Header */
+header#mainHeader {
+    min-height: 30px;
+}
+
+header#mainHeader>div#headerText {
+    float: left;
+    width: 150px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+main>section {
+    margin-top: 1%;
+}
+
+/* Sections */
+main>section#options>header, main>section#warnings>header, main>section#orders>header {
+    font-size: 18pt;
+    font-weight: bold;
+    margin-bottom: 1%;
+}
+
+section#warnings, section#orders { /* Focussed display sections */
+    float: left;
+    margin: 2%;
+    box-shadow: 0 3px 3px #888888;
+    border: 1px solid #D6D6D6;
+    width: 100%;
+    min-width: 200px; /* Set a minimum width so that they move down the screen rather than getting inifinitely smaller, when the screen is squashed */
+    padding: 1%;
+}
+
+/* Fieldset */
+fieldset {
+    margin: 1% 0;
+}
+
+fieldset>legend {
+    font-weight: bold;
+}
+
+/* Reporting Grid styling */
+main div.reporting-grid>section.grid-item {
+    float: left;
+    margin-right: 2%;
+    margin-bottom: 2%;
+    box-shadow: 0 3px 3px #888888;
+    border: 1px solid #D6D6D6;
+    width: 20%;
+    min-width: 100px; /* Set a minimum width so that they move down the screen rather than getting inifinitely smaller, when the screen is squashed */
+    padding: 1%;
+}
+
+/* Misc */

@@ -40,9 +40,6 @@ header#mainHeader>div#headerRight {
 
 header#mainHeader>div#headerRight>span.link {
     font-weight: bold;
-}
-
-header#mainHeader>div#headerRight>span.link#last {
     margin-left: 10px;
 }
 
@@ -103,7 +100,7 @@ main div.grid>section.grid-item>img {
     height: 100%;
 }
 
-main div.grid>section.grid-item>header, main div.admin-grid>section.grid-item>header {
+main div.grid>section.grid-item>header, main div.admin-grid>section.grid-item>header, main div.reporting-grid>section.grid-item>header {
     text-align: center;
     font-weight: bold;
 }

@@ -2,16 +2,16 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>ecoCart: Admin</title>
-        <meta name="description" content="ecoCart Admin area">
+        <title>ecoCart: Reporting</title>
+        <meta name="description" content="ecoCart Reporting area">
         <meta name="author" content="UP608985">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> <!-- Mobile specific meta tag -->
         <script type="text/javascript" src="../lib/shared.js"></script> <!-- Shared JavaScript File -->
         <script type="text/javascript" src="../lib/Logger.class.js"></script> <!-- Logger class JavaScript File -->
         <script type="text/javascript" src="../lib/xhr.js"></script> <!-- XHR JavaScript File -->
         <script type="text/javascript" src="../lib/animations.js"></script> <!-- Animations JavaScript File -->
-        <script type="text/javascript" src="../lib/admin_setup.js"></script> <!-- Setup JavaScript File -->
-        <link rel="stylesheet" href="../css/admin.css"> <!-- Admin Specific CSS -->
+        <script type="text/javascript" src="../lib/reporting_setup.js"></script> <!-- Setup JavaScript File -->
+        <link rel="stylesheet" href="../css/reporting.css"> <!-- Reporting Specific CSS -->
         <link rel="stylesheet" href="../css/base.css"> <!-- Shared CSS -->
         <!-- Favicons -->
         <link rel="shortcut icon" href="../images/favicon.ico">
@@ -24,37 +24,30 @@
         <div id="container">
             <header id="mainHeader">
                 <div id="headerText">
-                    Admin
+                    Reporting
                 </div>
                 <div id="headerRight">
                     <span class="link"><a href="../">Shop</a></span>
-                    <span id="last" class="link"><a href="../reporting">Reporting</a></span>
+                    <span id="last" class="link"><a href="../admin/">Admin</a></span>
                 </div>
             </header>
             <aside id="catNav">
                 <nav>
                     <ul>
-                        <li><a href="#" class="options-link link" data-view="category">Categories</a></li>
-                        <li><a href="#" class="options-link link" data-view="products">Products</a></li>
-                        <li><a href="#" class="options-link link" data-view="delivery-options">Delivery Options</a></li>
+                        <li><a href="#" class="options-link link" data-view="warnings">Stock Warnings</a></li>
+                        <li><a href="#" class="options-link link" data-view="orders">Orders</a></li>
                     </ul>
                 </nav>
             </aside>
             <main>
                 <section id="options">
                     <header>Options</header>
-                    <div class="admin-grid">
+                    <div class="reporting-grid">
                         <section class="grid-item">
-                            <header class="link">Categories</header>
+                            <header class="link">Stock Warnings</header>
                         </section>
                         <section class="grid-item">
-                            <header class="link">Products</header>
-                        </section>
-                        <section class="grid-item">
-                            <header class="link">Delivery Options</header>
-                        </section>
-                        <section class="grid-item">
-                            <header class="link">Settings</header>
+                            <header class="link">Orders</header>
                         </section>
                     </div>
                 </section>
