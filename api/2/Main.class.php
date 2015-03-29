@@ -16,9 +16,9 @@ class Main extends API {
         // <editor-fold defaultstate="collapsed" desc="time">
         if ($this->method == "GET") {
             if (isset($args[0])) {
-                $format = $args[0];
+                $format = filter_var($args[0], FILTER_SANITIZE_STRING);
             } else {
-                $format = "d/m/Y";
+                $format = "d/m/Y"; // Default format
             }
             $this->statusCode = 200; // Set the status code to OK (successful)
             $this->resp['data'] = date($format); // Put the data into the $this->resp['data'] element
@@ -49,10 +49,12 @@ class Main extends API {
                     if (!isset($args[1]) || !is_numeric($args[1])) { // If the parent isn't set or isn't a number
                         $args[1] = 0; // Set the parent to none
                     }
-                    $stmt->bindParam(":parentID", $args[1]);
+                    $parent = filter_var($args[1], FILTER_SANITIZE_NUMBER_INT);
+                    $stmt->bindParam(":parentID", $parent);
                 } else if (isset($args[0]) && is_numeric($args[0])) { // If we're returning a specific category
                     $stmt = $db_conn->prepare("SELECT * FROM `category` WHERE `id` = :catID");
-                    $stmt->bindParam(":catID", $args[0]);
+                    $catID = filter_var($args[0], FILTER_SANITIZE_NUMBER_INT);
+                    $stmt->bindParam(":catID", $catID);
                 } else { // If we're just returning all of the categories
                     $stmt = $db_conn->prepare("SELECT * FROM `category`");
                 }
@@ -66,7 +68,6 @@ class Main extends API {
                 // <editor-fold defaultstate="collapsed" desc="POST">
                 $str = "INSERT INTO `category` (`name`, `parent_id`) VALUES (:name, :parent)";
 
-                // TODO: Validate these inputs
                 $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
                 $parent = filter_input(INPUT_POST, 'parent', FILTER_SANITIZE_NUMBER_INT);
 
@@ -86,11 +87,10 @@ class Main extends API {
                 if (isset($args[0]) && is_numeric($args[0])) { // If we're updating a specific category
                     $str = "UPDATE `category` SET `name` = :name, `parent_id` = :parent WHERE `id` = :id";
                     
-                    // TODO: Validate category PUT inputs
                     $putVars = []; // Empty array
                     Lib::parse_input($putVars); // Parses PUT data into $_POST superglobal
                     
-                    $id = $args[0];
+                    $id = filter_var($args[0], FILTER_SANITIZE_NUMBER_INT);
                     $name = filter_var($putVars['name'], FILTER_SANITIZE_STRING);
                     $parent = filter_var($putVars['parent'], FILTER_SANITIZE_NUMBER_INT);
                     
@@ -110,7 +110,7 @@ class Main extends API {
                 $stmt = null;
 
                 if (isset($args[0]) && is_numeric($args[0])) { // If we're deleting a specific category
-                    $catID = $args[0];
+                    $catID = filter_var($args[0], FILTER_SANITIZE_NUMBER_INT);
                     
                     // Update items that were using the category to be deleted
                     $catStmt = $db_conn->prepare("SELECT `parent_id` FROM `category` WHERE `id` = :catID");
@@ -134,7 +134,7 @@ class Main extends API {
 					$updateStmt->execute(); // Run the update statement
 					
                     $stmt = $db_conn->prepare("DELETE FROM `category` WHERE `id` = :catID");
-                    $stmt->bindParam(":catID", $args[0]);
+                    $stmt->bindParam(":catID", $catID);
                 }
 
                 $stmt->execute();
@@ -167,27 +167,30 @@ class Main extends API {
                 $str = "SELECT `item`.`id`, `item`.`cat`, `item`.`name`, `item`.`description`, `item`.`weight`, `item`.`price`, `item`.`stock`, `item`.`featured`, `item_image`.`main` as `main_image`, `item_image`.`image`  FROM `item` LEFT JOIN `item_image` ON `item`.`id`=`item_image`.`item_id`";
 
                 if (isset($args[0]) && is_numeric($args[0])) { // If we're returning a specific item
+                    $id = filter_var($args[0], FILTER_SANITIZE_NUMBER_INT);
                     $str .= " WHERE `id` = :id";
                     $stmt = $db_conn->prepare($str);
-                    $stmt->bindParam(":id", $args[0]);
+                    $stmt->bindParam(":id", $id);
                 } else if (isset($args[0]) && ($args[0] == "featured")) { // If we're returning featured items
                     $str .= " WHERE `featured` = 1";
                     $stmt = $db_conn->prepare($str);
                 } else if (isset($args[0]) && ($args[0] == "category")) { // If we're returning items within a specific category
                     if (isset($args[1]) && is_numeric($args[1])) { // If the category ID is present
+                        $catID = filter_var($args[1], FILTER_SANITIZE_NUMBER_INT);
                         $str .= " WHERE `cat` = :cat";
                         $stmt = $db_conn->prepare($str);
-                        $stmt->bindParam(":cat", $args[1]);
+                        $stmt->bindParam(":cat", $catID);
                     } else { // If the category ID is not present
                         $this->statusCode = 404;
                         break;
                     }
                 } else if (isset($args[0]) && ($args[0] == "search")) { // If we're returning searched for items
                     if (isset($args[1]) && is_string($args[1])) { // If the search value is present
+                        $searchQuery = filter_var($args[1], FILTER_SANITIZE_STRING);
                         $str .= " WHERE `name` LIKE :search";
                         $stmt = $db_conn->prepare($str);
-                        $args[1] = "%" . $args[1] . "%"; // Add wildcard characters around the search value
-                        $stmt->bindParam(":search", $args[1]);
+                        $searchQuery = "%" . $searchQuery . "%"; // Add wildcard characters around the search value
+                        $stmt->bindParam(":search", $searchQuery);
                     } else { // If the search value isn't present
                         $this->statusCode = 404;
                         break;
@@ -216,7 +219,6 @@ class Main extends API {
                 // <editor-fold defaultstate="collapsed" desc="POST">              
                 $str = "INSERT INTO `item` (`name`, `cat`, `description`, `weight`, `featured`, `price`, `stock`) VALUES (:name, :category, :description, :weight, :featured, :price, :stock)";
 
-                // TODO: Validate these inputs
                 $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
                 $category = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_NUMBER_INT);
                 $description = filter_input(INPUT_POST, 'desc', FILTER_SANITIZE_STRING);
@@ -269,8 +271,7 @@ class Main extends API {
                     Lib::parse_input($putVars); // Parses PUT data into $_POST superglobal
 //                    print_r($putVars);
                     
-                    // TODO: Validate item PUT inputs
-                    $id = $args[0];
+                    $id = filter_var($args[0], FILTER_SANITIZE_NUMBER_INT);
                     $name = filter_var($putVars['name'], FILTER_SANITIZE_STRING);
                     $category = filter_var($putVars['category'], FILTER_SANITIZE_NUMBER_INT);
                     $description = filter_var($putVars['desc'], FILTER_SANITIZE_STRING);
@@ -337,8 +338,9 @@ class Main extends API {
 				
                 if (isset($args[0]) && is_numeric($args[0])) { // If we're deleting a specific item
                     // Get the item image names, so we can delete them
+                    $prodID = filter_var($args[0], FILTER_SANITIZE_NUMBER_INT);
                     $imagesStmt = $db_conn->prepare("SELECT `image` FROM `item_image` WHERE `item_id` = :prodID");
-                    $imagesStmt->bindParam(":prodID", $args[0]);
+                    $imagesStmt->bindParam(":prodID", $prodID);
                     if ($imagesStmt->execute()) { // If the statement succeeded
                         while ($row = $imagesStmt->fetch(PDO::FETCH_ASSOC)) { // For each statement
                             $imageName = $row['image'];
@@ -348,11 +350,11 @@ class Main extends API {
                     
 					// Delete images for this item
 					$imagesDelStmt = $db_conn->prepare("DELETE FROM `item_image` WHERE `item_id` = :prodID");
-					$imagesDelStmt->bindParam(":prodID", $args[0]);
+					$imagesDelStmt->bindParam(":prodID", $prodID);
 					$imagesDelStmt->execute();
 					
                     $stmt = $db_conn->prepare("DELETE FROM `item` WHERE `id` = :prodID");
-                    $stmt->bindParam(":prodID", $args[0]);
+                    $stmt->bindParam(":prodID", $prodID);
                 }
 
                 $stmt->execute();
@@ -384,14 +386,16 @@ class Main extends API {
                 $str = "SELECT * FROM `delivery_option`";
 
                 if (isset($args[0]) && is_numeric($args[0])) { // If we're returning a specific delivery option
+                    $id = filter_var($args[0], FILTER_SANITIZE_NUMBER_INT);
                     $str .= " WHERE `id` = :id";
                     $stmt = $db_conn->prepare($str);
-                    $stmt->bindParam(":id", $args[0]);
+                    $stmt->bindParam(":id", $id);
                 } else if (isset($args[0]) && ($args[0] == "max-weight")) { // If we're returning delivery options within a max weight
                     if (isset($args[1]) && is_numeric($args[1])) { // If the max weight is specified
+                        $maxWeight = filter_var($args[1], FILTER_SANITIZE_STRING);
                         $str .= " WHERE `max_weight` >= :maxWeight ORDER BY `eco_rating` DESC";
                         $stmt = $db_conn->prepare($str);
-                        $stmt->bindParam(":maxWeight", $args[1]);
+                        $stmt->bindParam(":maxWeight", $maxWeight);
                     } else { // If the max weight isn't specified
                         $this->statusCode = 404;
                         break;
@@ -409,7 +413,6 @@ class Main extends API {
                 // <editor-fold defaultstate="collapsed" desc="POST">
                 $str = "INSERT INTO `delivery_option` (`name`, `max_weight`, `eco_rating`, `cost`) VALUES (:name, :maxWeight, :ecoRating, :cost)";
 
-                // TODO: Validate delivery option POST inputs
                 $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
                 $maxWeight = filter_input(INPUT_POST, 'maxWeight', FILTER_SANITIZE_STRING); // Sanitise as string to stop conversion of double to int
                 $ecoRating = filter_input(INPUT_POST, 'ecoRating', FILTER_SANITIZE_NUMBER_INT);
@@ -433,11 +436,10 @@ class Main extends API {
                 if (isset($args[0]) && is_numeric($args[0])) { // If we're updating a specific delivery option
                     $str = "UPDATE `delivery_option` SET `name` = :name, `max_weight` = :maxWeight, `eco_rating` = :ecoRating, `cost` = :cost WHERE `id` = :id";
                     
-                    // TODO: Validate delivery option PUT inputs
                     $putVars = []; // Empty array
                     Lib::parse_input($putVars); // Parses PUT data into $_POST superglobal
                     
-                    $id = $args[0];
+                    $id = filter_var($args[0], FILTER_SANITIZE_NUMBER_INT);
                     $name = filter_var($putVars['name'], FILTER_SANITIZE_STRING);
                     $maxWeight = filter_var($putVars['maxWeight'], FILTER_SANITIZE_STRING); // Sanitise as string to stop conversion of double to int
                     $ecoRating = filter_var($putVars['ecoRating'], FILTER_SANITIZE_NUMBER_INT);
@@ -461,8 +463,9 @@ class Main extends API {
                 $stmt = null;
 
                 if (isset($args[0]) && is_numeric($args[0])) { // If we're deleting a specific delivery option
+                    $id = filter_var($args[0], FILTER_SANITIZE_NUMBER_INT);
                     $stmt = $db_conn->prepare("DELETE FROM `delivery_option` WHERE `id` = :id");
-                    $stmt->bindParam(':id', $args[0]);
+                    $stmt->bindParam(':id', $id);
                 }
 
                 $stmt->execute();
@@ -493,7 +496,6 @@ class Main extends API {
                 $stmt = null;
                 $str = "INSERT INTO `order` (`title`, `first_name`, `last_name`, `address_1`, `address_2`, `post_code`, `delivery`, `created`) VALUES (:title, :fName, :lName, :address1, :address2, :postCode, :delivery, UNIX_TIMESTAMP())";
 
-                // TODO: Validate these inputs
                 $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
                 $fName = filter_input(INPUT_POST, 'fName', FILTER_SANITIZE_STRING);
                 $lName = filter_input(INPUT_POST, 'lName', FILTER_SANITIZE_STRING);
@@ -541,8 +543,7 @@ class Main extends API {
                     $stmt = null;
                     $str = "INSERT INTO `order_item` (`order_id`, `item_id`, `quantity`) VALUES (:order, :item, :qty)";
 
-                    // TODO: Validate these inputs
-                    $orderID = $args[0];
+                    $orderID = filter_var($args[0], FILTER_SANITIZE_NUMBER_INT);
                     $item = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
                     $qty = filter_input(INPUT_POST, 'qty', FILTER_SANITIZE_NUMBER_INT);
 
