@@ -192,6 +192,16 @@ class Main extends API {
                         $this->statusCode = 404;
                         break;
                     }
+                } else if (isset($args[0]) && ($args[0] == "stock")) { // If we're returning items based on their stock level being below a certain number
+                    if (isset($args[1]) && is_numeric($args[1])) { // If the stock level value is present
+                        $stockThreshold = filter_var($args[1], FILTER_SANITIZE_NUMBER_INT);
+                        $str .= " WHERE `stock` < :stockThreshold ORDER BY `stock` ASC";
+                        $stmt = $db_conn->prepare($str);
+                        $stmt->bindParam(":stockThreshold", $stockThreshold);
+                    } else { // If the search value isn't present
+                        $this->statusCode = 404;
+                        break;
+                    }
                 } else { // If the arguments aren't supported
                     $this->statusCode = 404;
                     break;

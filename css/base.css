@@ -123,6 +123,16 @@ main>nav#catHierarchy {
 }
 
 /* Tables */
+table#catTable, table#delTable, table#productsTable, table#warnTable {
+	border-collapse: collapse;
+	margin-top: 1%;
+    width: 100%;
+}
+
+table#catTable tr:nth-child(even), table#delTable tr:nth-child(even), table#productsTable tr:nth-child(even), table#warnTable tr:nth-child(even) {
+	background-color: #D6D6D6;
+}
+
 table>tr.heading, table>tr#heading {
     font-weight: bold;
 }

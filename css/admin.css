@@ -67,18 +67,8 @@ form#add-category>select, form#add-category>input, form#add-del>input {
 }
 
 /* Tables */
-table#catTable, table#delTable, table#productsTable {
-	border-collapse: collapse;
-	margin-top: 1%;
-    width: 100%;
-}
-
 table#product-table label {
     font-weight: normal;
-}
-
-table#catTable tr:nth-child(even), table#delTable tr:nth-child(even), table#productsTable tr:nth-child(even) {
-	background-color: #D6D6D6;
 }
 
 /* Misc */
