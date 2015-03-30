@@ -540,27 +540,31 @@ class Main extends API {
             case "POST":
                 // <editor-fold defaultstate="collapsed" desc="POST">
                 if (isset($args[0]) && is_numeric($args[0])) { // If the order ID is set
-                    $stmt = null;
-                    $str = "INSERT INTO `order_item` (`order_id`, `item_id`, `quantity`) VALUES (:order, :item, :qty)";
-
                     $orderID = filter_var($args[0], FILTER_SANITIZE_NUMBER_INT);
                     $item = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
                     $qty = filter_input(INPUT_POST, 'qty', FILTER_SANITIZE_NUMBER_INT);
 
-                    $stmt = $db_conn->prepare($str);
-                    $stmt->bindParam("order", $orderID);
-                    $stmt->bindParam("item", $item);
-                    $stmt->bindParam("qty", $qty);
-
-                    if ($stmt->execute()) { // If the insert succeeded
-                        // Update the stock level for this item
-                        $stockStr = "UPDATE `item` SET `stock` = `stock` - :qty WHERE `id` = :item";
-                        $stockStmt = $db_conn->prepare($stockStr);
-                        $stockStmt->bindParam("item", $item);
-                        $stockStmt->bindParam("qty", $qty);
-                        $stockStmt->execute(); // Update the stock
-                    }
+                    // Update the stock level for this item
+                    $stockStr = "UPDATE `item` SET `stock` = `stock` - :qty WHERE `id` = :item AND `stock` >= :qty"; // Make sure the stock level is at least the quantity being ordered to avoid having stock levels of -1 for example
+                    $stockStmt = $db_conn->prepare($stockStr);
+                    $stockStmt->bindParam("item", $item);
+                    $stockStmt->bindParam("qty", $qty);
+                    $stockStmt->execute();
                     
+                    if ($stockStmt->rowCount() > 0) { // If the update affected at least 1 row succeeded.
+                        $str = "INSERT INTO `order_item` (`order_id`, `item_id`, `quantity`) VALUES (:order, :item, :qty)";
+                        $stmt = $db_conn->prepare($str);
+                        $stmt->bindParam("order", $orderID);
+                        $stmt->bindParam("item", $item);
+                        $stmt->bindParam("qty", $qty);
+
+                        $stmt->execute();
+                        $this->statusCode = 200;
+                        $this->resp['data'] = "Order item added.";
+                    } else {
+                        $this->statusCode = 500;
+                        $this->resp['error'] = "Couldn't add order item, adequate stock may not be available.";
+                    }
                 } else { // If the ID of the order isn't set
                     $this->statusCode = 404;
                 }
