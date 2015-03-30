@@ -491,6 +491,60 @@ class Main extends API {
         global $db_conn;
 
         switch ($this->method) {
+            case "GET":
+                // <editor-fold defaultstate="collapsed" desc="GET">
+                $stmt = null;
+
+                if (isset($args[0]) && ($args[0] == "search")) { // If we're returning all categories with a specified parent
+                    $stmt = $db_conn->prepare("SELECT * FROM `order` WHERE `created` >= :dateStart AND `created` <= :dateEnd");
+                    if (isset($args[1]) && isset($args[2])) { // If the dateStart and dateEnd are set
+                        $dateStart = strtotime(filter_var($args[1], FILTER_SANITIZE_STRING));
+                        $dateEnd = strtotime(filter_var($args[2], FILTER_SANITIZE_STRING));
+                        //print("START: " . $dateStart . " END: " . $dateEnd); exit;
+                        $stmt->bindParam(":dateStart", $dateStart);
+                        $stmt->bindParam(":dateEnd", $dateEnd);
+                        
+                        $results = [];
+                        
+                        if ($stmt->execute()) {
+                            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                $total = 0;
+                                
+                                // Get delivery cost
+                                $delStmt = $db_conn->prepare("SELECT `cost` FROM `delivery_option` WHERE `id` = :del LIMIT 1");
+                                $delStmt->bindParam(":del", $row['delivery']);
+                                $delStmt->execute();
+                                $delRow = $delStmt->fetch(PDO::FETCH_ASSOC); // Should only be one result
+                                $total += $delRow['cost'];
+                                
+                                // Get items cost
+                                $orderItemsStmt = $db_conn->prepare("SELECT `item_id`, `quantity` FROM `order_item` WHERE `order_id` = :orderID");
+                                $orderItemsStmt->bindParam(":orderID", $row['id']);
+                                if ($orderItemsStmt->execute()) {
+                                    while ($orderItemRow = $orderItemsStmt->fetch(PDO::FETCH_ASSOC)) { // For each item
+                                        $itemStmt = $db_conn->prepare("SELECT `price` FROM `item` WHERE `id` = :itemID LIMIT 1");
+                                        $itemStmt->bindParam(":itemID", $orderItemRow['item_id']);
+                                        $itemStmt->execute();
+                                        $itemRow = $itemStmt->fetch(PDO::FETCH_ASSOC); // Should only be one result
+                                        $total += ($itemRow['price'] * $orderItemRow['quantity']);
+                                    }
+                                }
+                                
+                                $row['total'] = $total;
+                                $results[] = $row;
+                            }
+                        }
+                        
+                        $this->resp['data'] = $results; // Return the results
+                    }
+                    
+                } else { // Invalid
+                    $this->statusCode = 500;
+                    return;
+                }
+                // </editor-fold>
+                break;
+            
             case "POST":
                 // <editor-fold defaultstate="collapsed" desc="POST">
                 $stmt = null;

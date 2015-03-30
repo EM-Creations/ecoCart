@@ -61,3 +61,9 @@ main div.reporting-grid>section.grid-item {
 }
 
 /* Misc */
+div#turnover {
+    float: right;
+    margin-top: 1%;
+    font-weight: bold;
+    color: #57d94e;
+}

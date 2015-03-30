@@ -123,13 +123,13 @@ main>nav#catHierarchy {
 }
 
 /* Tables */
-table#catTable, table#delTable, table#productsTable, table#warnTable {
+table#catTable, table#delTable, table#productsTable, table#warnTable, table#ordersTable {
 	border-collapse: collapse;
 	margin-top: 1%;
     width: 100%;
 }
 
-table#catTable tr:nth-child(even), table#delTable tr:nth-child(even), table#productsTable tr:nth-child(even), table#warnTable tr:nth-child(even) {
+table#catTable tr:nth-child(even), table#delTable tr:nth-child(even), table#productsTable tr:nth-child(even), table#warnTable tr:nth-child(even), table#ordersTable tr:nth-child(even) {
 	background-color: #D6D6D6;
 }
 
