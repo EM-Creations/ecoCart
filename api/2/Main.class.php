@@ -545,6 +545,29 @@ class Main extends API {
                 // </editor-fold>
                 break;
             
+            case "PUT":
+                // <editor-fold defaultstate="collapsed" desc="PUT">
+                if ((isset($args[0]) && ($args[0] == "markSent")) && (isset($args[1]) && is_numeric($args[1]))) { // If we're marking an order as sent
+                    $putVars = []; // Empty array
+                    Lib::parse_input($putVars); // Parses PUT data
+                    
+                    $str = "UPDATE `order` SET `sent` = :sentVal WHERE `id` = :orderID";
+
+                    $orderID = filter_var($args[1], FILTER_SANITIZE_NUMBER_INT);
+                    $sent = filter_var($putVars['sent'], FILTER_SANITIZE_NUMBER_INT);
+
+                    $stmt = $db_conn->prepare($str);
+                    $stmt->bindParam('orderID', $orderID);
+                    $stmt->bindParam('sentVal', $sent);
+
+                    $stmt->execute();
+                    $this->resp['data'] = "Order sent value updated"; // Return the ID of the created order, to be subsequently used
+                } else {
+                    $this->statusCode = 500; // Server error, invalid
+                }
+                // </editor-fold>
+                break;
+            
             case "POST":
                 // <editor-fold defaultstate="collapsed" desc="POST">
                 $stmt = null;
