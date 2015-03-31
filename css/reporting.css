@@ -66,6 +66,27 @@ main div.reporting-grid>section.grid-item {
     padding: 1%;
 }
 
+/* View Order */
+div#view-order-container {
+    position: fixed;
+    z-index: 90; /* Bring to the forefront of the user's screen' */
+    left: 30%; /* % of window */
+    width: 40%;
+    box-shadow: 0 3px 3px #888888;
+    border: 1px solid #D6D6D6;
+    background-color: #FFFFFF;
+}
+
+div#view-order-container>div#view-order-content>header {
+    font-size: 16pt;
+    font-weight: bold;
+    margin-bottom: 1%;
+}
+
+div#view-order-container>div#view-order-content>button {
+    float: right;
+}
+
 /* Misc */
 div#turnover {
     float: right;

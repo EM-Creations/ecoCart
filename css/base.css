@@ -123,7 +123,7 @@ main>nav#catHierarchy {
 }
 
 /* Tables */
-table#catTable, table#delTable, table#productsTable, table#warnTable, table#ordersTable {
+table#catTable, table#delTable, table#productsTable, table#warnTable, table#ordersTable, table#items {
 	border-collapse: collapse;
 	margin-top: 1%;
     width: 100%;

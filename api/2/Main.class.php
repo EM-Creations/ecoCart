@@ -614,6 +614,24 @@ class Main extends API {
         global $db_conn;
 
         switch ($this->method) {
+            case "GET":
+                // <editor-fold defaultstate="collapsed" desc="GET">
+                $stmt = null;
+
+                if ((isset($args[0]) && ($args[0] == "order")) && (isset($args[1]) && is_numeric($args[1]))) { // If we're returning items for a specific order
+                    $stmt = $db_conn->prepare("SELECT `order_item`.`quantity`, `item`.`name`, `item`.`price` FROM `order_item` LEFT JOIN `item` ON `order_item`.`item_id` = `item`.`id`  WHERE `order_item`.`order_id` = :orderID");
+                    $orderID = filter_var($args[1], FILTER_SANITIZE_NUMBER_INT);
+                    $stmt->bindParam(":orderID", $orderID);
+                    
+                    $stmt->execute();
+                    $this->resp['data'] = $stmt->fetchAll(PDO::FETCH_ASSOC); // Return the results
+                } else { // Invalid
+                    $this->statusCode = 500;
+                    return;
+                }
+                // </editor-fold>
+                break;
+            
             case "POST":
                 // <editor-fold defaultstate="collapsed" desc="POST">
                 if (isset($args[0]) && is_numeric($args[0])) { // If the order ID is set
