@@ -671,4 +671,71 @@ class Main extends API {
         }
         // </editor-fold>
     }
+    
+    /**
+     * Settings end point
+     * 
+     * @global PDO $db_conn
+     * @param array $args
+     */
+    protected function settings($args)
+    {
+        // <editor-fold defaultstate="collapsed" desc="settings">
+        global $db_conn;
+
+        switch ($this->method) {
+            case "GET":
+                // <editor-fold defaultstate="collapsed" desc="GET">
+                $stmt = null;
+
+                if (isset($args[0]) && is_string($args[0])) { // If we're returning a specific setting
+                    $stmt = $db_conn->prepare("SELECT * FROM `setting` WHERE `name` = :settingName");
+                    $settingName = filter_var($args[0], FILTER_SANITIZE_STRING);
+                    $stmt->bindParam(":settingName", $settingName);
+                } else { // Invalid
+                    $this->statusCode = 500;
+                    return;
+                }
+
+                $stmt->execute();
+                
+                if ($stmt->rowCount()) { // If the setting exists
+                    $this->resp['data'] = $stmt->fetchAll(PDO::FETCH_ASSOC); // Return the results
+                } else { // If the setting doesn't exist
+                    $this->resp['data'] = "Setting does not exist";
+                }
+                // </editor-fold>
+                break;
+                
+            case "PUT":
+                // <editor-fold defaultstate="collapsed" desc="PUT">
+                $stmt = null;
+                
+                if (isset($args[0]) && is_string($args[0])) { // If we're updating a specific setting
+                    $str = "UPDATE `setting` SET `value` = :value WHERE `name` = :name LIMIT 1";
+                    
+                    $putVars = []; // Empty array
+                    Lib::parse_input($putVars); // Parses PUT data into $putVars
+                    
+                    $name = filter_var($args[0], FILTER_SANITIZE_STRING);
+                    $value = filter_var($putVars['value'], FILTER_SANITIZE_STRING);
+                    
+                    $stmt = $db_conn->prepare($str);
+                    $stmt->bindParam('name', $name);
+                    $stmt->bindParam('value', $value);
+                } else { // Invalid
+                    $this->statusCode = 500;
+                    return;
+                }
+                
+                $stmt->execute();
+                $this->resp['data'] = "updated";
+                // </editor-fold>
+                break;
+
+            default:
+                $this->statusCode = 405; // Method not allowed
+        }
+        // </editor-fold>
+    }
 }
