@@ -14,16 +14,31 @@ class Main extends API {
     protected function time($args)
     {
         // <editor-fold defaultstate="collapsed" desc="time">
-        if ($this->method == "GET") {
-            if (isset($args[0])) {
-                $format = filter_var($args[0], FILTER_SANITIZE_STRING);
-            } else {
-                $format = "d/m/Y"; // Default format
-            }
-            $this->statusCode = 200; // Set the status code to OK (successful)
-            $this->resp['data'] = date($format); // Put the data into the $this->resp['data'] element
-        } else {
-            $this->statusCode = 405; // Only accepts GET requests
+        switch ($this->method) {
+            case "GET":
+                // <editor-fold defaultstate="collapsed" desc="GET">
+                if (isset($args[0])) {
+                    $format = filter_var($args[0], FILTER_SANITIZE_STRING);
+                } else {
+                    $format = "d/m/Y"; // Default format
+                }
+                $this->resp['data'] = date($format); // Put the data into the $this->resp['data'] element
+                // </editor-fold>
+                break;
+                
+            case "OPTIONS":
+                // <editor-fold defaultstate="collapsed" desc="OPTIONS">
+                $this->resp['data'] = ["GET" => 
+                                            ["description" => "Get the time.", "parameters" => 
+                                                ["format" => 
+                                                    ["type" => "string", "description" => "Time format.", "required" => false]]
+                                            ]
+                                        ]; // Put the data into the $this->resp['data'] element
+                // </editor-fold>
+                break;
+                
+            default:
+                $this->statusCode = 405; // Only accepts GET requests
         }
         // </editor-fold>
     }
@@ -665,6 +680,30 @@ class Main extends API {
                 }
                 // </editor-fold>
                 break;
+                
+            case "OPTIONS":
+                // <editor-fold defaultstate="collapsed" desc="OPTIONS">
+                $this->resp['data'] = ["GET" => 
+                                            ["description" => "Get order items for an order.", "parameters" => 
+                                                ["order" => 
+                                                    ["type" => "string", "description" => "Specifies that order items for an order are to be returned.", "required" => true],
+                                                "order ID" =>
+                                                    ["type" => "int", "description" => "The order ID to be used to return order items for.", "required" => true]
+                                                ]
+                                            ],
+                                        "POST" => 
+                                            ["description" => "Add an order item to an order.", "parameters" => 
+                                                ["order ID" => 
+                                                    ["type" => "int", "description" => "Specifies what order to add order items to.", "required" => true],
+                                                "item" =>
+                                                    ["type" => "int", "description" => "The item to add to the order.", "required" => true],
+                                                "qty" =>
+                                                    ["type" => "int", "description" => "The quantity of the item to add to the order.", "required" => true]
+                                                ]
+                                            ]
+                                    ]; // Put the data into the $this->resp['data'] element
+                // </editor-fold>
+                break;
 
             default:
                 $this->statusCode = 405;
@@ -730,6 +769,26 @@ class Main extends API {
                 
                 $stmt->execute();
                 $this->resp['data'] = "updated";
+                // </editor-fold>
+                break;
+                
+            case "OPTIONS":
+                // <editor-fold defaultstate="collapsed" desc="OPTIONS">
+                $this->resp['data'] = ["GET" => 
+                                            ["description" => "Get a setting.", "parameters" => 
+                                                ["setting" => 
+                                                    ["type" => "string", "description" => "Setting name.", "required" => true]
+                                                ]
+                                            ],
+                                        "PUT" =>
+                                            ["description" => "Set a specific setting.", "parameters" =>
+                                                ["setting" =>
+                                                    ["type" => "string", "description" => "Setting name.", "required" => true],
+                                                "value" =>
+                                                    ["type" => "string", "description" => "Setting value.", "required" => true]
+                                                ]
+                                            ]
+                                        ]; // Put the data into the $this->resp['data'] element
                 // </editor-fold>
                 break;
 
