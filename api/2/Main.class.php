@@ -28,10 +28,15 @@ class Main extends API {
                 
             case "OPTIONS":
                 // <editor-fold defaultstate="collapsed" desc="OPTIONS">
-                $this->resp['data'] = ["GET" => 
-                                            ["description" => "Get the time.", "parameters" => 
-                                                ["format" => 
-                                                    ["type" => "string", "description" => "Time format.", "required" => false]]
+                $this->resp['data'] = [
+                                        "GET" => 
+                                            [
+                                            "description" => "Get the time.", 
+                                            "parameters" => 
+                                                [
+                                                "format" => 
+                                                    ["type" => "string", "description" => "Time format.", "required" => false]
+                                                ]
                                             ]
                                         ]; // Put the data into the $this->resp['data'] element
                 // </editor-fold>
@@ -610,6 +615,60 @@ class Main extends API {
                 $this->resp['data'] = $db_conn->lastInsertID(); // Return the ID of the created order, to be subsequently used
                 // </editor-fold>
                 break;
+            
+            case "OPTIONS":
+                // <editor-fold defaultstate="collapsed" desc="OPTIONS">
+                $this->resp['data'] = [
+                                        "GET" => 
+                                            [
+                                            "description" => "Get orders' details.",
+                                            "parameters" => 
+                                                [
+                                                "search" => 
+                                                    ["type" => "string", "description" => "Specifies that orders are being searched through.", "required" => true],
+                                                "dateStart" =>
+                                                    ["type" => "string", "description" => "Date to start searching orders from.", "required" => true],
+                                                "dateEnd" =>
+                                                    ["type" => "string", "description" => "Date to end searching orders from.", "required" => true]
+                                                ]
+                                            ],
+                                        "PUT" =>
+                                            [
+                                            "description" => "Mark a specific order as sent.", 
+                                            "parameters" =>
+                                                [
+                                                "markSent" =>
+                                                    ["type" => "string", "description" => "Specifies that this order is to have its sent value changed.", "required" => true],
+                                                "orderID" =>
+                                                    ["type" => "int", "description" => "The order ID to modify.", "required" => true],
+                                                "sent" =>
+                                                    ["type" => "int", "description" => "Specifies if an order to be marked as sent (1) or unsent (0).", "required" => true]
+                                                ]
+                                            ],
+                                        "POST" =>
+                                            [
+                                            "description" => "Creates a new order.", 
+                                            "parameters" =>
+                                                [
+                                                "title" =>
+                                                    ["type" => "string", "description" => "Customer's title.", "required" => true],
+                                                "fName" =>
+                                                    ["type" => "string", "description" => "Customer's first name.", "required" => true],
+                                                "lName" =>
+                                                    ["type" => "string", "description" => "Customer's last name.", "required" => true],
+                                                "address1" =>
+                                                    ["type" => "string", "description" => "Customer's address line 1.", "required" => true],
+                                                "address2" =>
+                                                    ["type" => "string", "description" => "Customer's address line 2.", "required" => true],
+                                                "postCode" =>
+                                                    ["type" => "string", "description" => "Customer's post code.", "required" => true],
+                                                "delivery" =>
+                                                    ["type" => "int", "description" => "The delivery option to use.", "required" => true]
+                                                ]
+                                            ]
+                                        ]; // Put the data into the $this->resp['data'] element
+                // </editor-fold>
+                break;
 
             default:
                 $this->statusCode = 405;
@@ -683,17 +742,24 @@ class Main extends API {
                 
             case "OPTIONS":
                 // <editor-fold defaultstate="collapsed" desc="OPTIONS">
-                $this->resp['data'] = ["GET" => 
-                                            ["description" => "Get order items for an order.", "parameters" => 
-                                                ["order" => 
+                $this->resp['data'] = [
+                                        "GET" => 
+                                            [
+                                            "description" => "Get order items for an order.", 
+                                            "parameters" => 
+                                                [
+                                                "order" => 
                                                     ["type" => "string", "description" => "Specifies that order items for an order are to be returned.", "required" => true],
                                                 "order ID" =>
                                                     ["type" => "int", "description" => "The order ID to be used to return order items for.", "required" => true]
                                                 ]
                                             ],
                                         "POST" => 
-                                            ["description" => "Add an order item to an order.", "parameters" => 
-                                                ["order ID" => 
+                                            [
+                                            "description" => "Add an order item to an order.", 
+                                            "parameters" => 
+                                                [
+                                                "order ID" => 
                                                     ["type" => "int", "description" => "Specifies what order to add order items to.", "required" => true],
                                                 "item" =>
                                                     ["type" => "int", "description" => "The item to add to the order.", "required" => true],
@@ -774,15 +840,22 @@ class Main extends API {
                 
             case "OPTIONS":
                 // <editor-fold defaultstate="collapsed" desc="OPTIONS">
-                $this->resp['data'] = ["GET" => 
-                                            ["description" => "Get a setting.", "parameters" => 
-                                                ["setting" => 
+                $this->resp['data'] = [
+                                        "GET" => 
+                                            [
+                                            "description" => "Get a setting.", 
+                                            "parameters" => 
+                                                [
+                                                "setting" => 
                                                     ["type" => "string", "description" => "Setting name.", "required" => true]
                                                 ]
                                             ],
                                         "PUT" =>
-                                            ["description" => "Set a specific setting.", "parameters" =>
-                                                ["setting" =>
+                                            [
+                                            "description" => "Set a specific setting.", 
+                                            "parameters" =>
+                                                [
+                                                "setting" =>
                                                     ["type" => "string", "description" => "Setting name.", "required" => true],
                                                 "value" =>
                                                     ["type" => "string", "description" => "Setting value.", "required" => true]
