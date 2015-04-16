@@ -797,9 +797,8 @@ class Main extends API {
                     $stmt = $db_conn->prepare("SELECT * FROM `setting` WHERE `name` = :settingName");
                     $settingName = filter_var($args[0], FILTER_SANITIZE_STRING);
                     $stmt->bindParam(":settingName", $settingName);
-                } else { // Invalid
-                    $this->statusCode = 500;
-                    return;
+                } else { // If we're returning all available settings
+                    $stmt = $db_conn->prepare("SELECT * FROM `setting`");
                 }
 
                 $stmt->execute();
@@ -847,7 +846,7 @@ class Main extends API {
                                             "parameters" => 
                                                 [
                                                 "setting" => 
-                                                    ["type" => "string", "description" => "Setting name.", "required" => true]
+                                                    ["type" => "string", "description" => "Setting name, only set if returning the value of a specific setting.", "required" => false]
                                                 ]
                                             ],
                                         "PUT" =>
