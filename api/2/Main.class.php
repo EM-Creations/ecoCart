@@ -161,6 +161,59 @@ class Main extends API {
                 $this->resp['data'] = "Deleted";
                 // </editor-fold>
                 break;
+                
+            case "OPTIONS":
+                // <editor-fold defaultstate="collapsed" desc="OPTIONS">
+                $this->resp['data'] = [
+                                        "GET" => 
+                                            [
+                                            "description" => "Get a category.", 
+                                            "parameters" => 
+                                                [
+                                                "category ID" => 
+                                                    ["type" => "int", "description" => "Specifies a specific category to return.", "required" => false],
+                                                "parent" =>
+                                                    ["type" => "string", "description" => "Modifier that dictates to return categories with a specific parent category.", "required" => false],
+                                                "category parent ID" =>
+                                                    ["type" => "int", "description" => "The specific parent category to return categories from.", "required" => false]
+                                                ]
+                                            ],
+                                        "POST" => 
+                                            [
+                                            "description" => "Add a new category.", 
+                                            "parameters" => 
+                                                [
+                                                "name" => 
+                                                    ["type" => "string", "description" => "Name for the new category.", "required" => true],
+                                                "parent" =>
+                                                    ["type" => "int", "description" => "Parent category ID for the new category.", "required" => true]
+                                                ]
+                                            ],
+                                        "PUT" => 
+                                            [
+                                            "description" => "Modify an existing category.", 
+                                            "parameters" => 
+                                                [
+                                                "category ID" => 
+                                                    ["type" => "int", "description" => "ID of the category to modify.", "required" => true],
+                                                "name" => 
+                                                    ["type" => "string", "description" => "Name for the category.", "required" => true],
+                                                "parent" =>
+                                                    ["type" => "int", "description" => "Parent category ID for the category.", "required" => true]
+                                                ]
+                                            ],
+                                        "DELETE" => 
+                                            [
+                                            "description" => "Delete a category.", 
+                                            "parameters" => 
+                                                [
+                                                "category ID" => 
+                                                    ["type" => "int", "description" => "ID of the category to delete.", "required" => true]
+                                                ]
+                                            ]
+                                    ]; // Put the data into the $this->resp['data'] element
+                // </editor-fold>
+                break;
 
             default:
                 $this->statusCode = 405; // Method not allowed
@@ -381,6 +434,89 @@ class Main extends API {
                 $this->resp['data'] = "Deleted";
                 // </editor-fold>
                 break;
+                
+            case "OPTIONS":
+                // <editor-fold defaultstate="collapsed" desc="OPTIONS">
+                $this->resp['data'] = [
+                                        "GET" => 
+                                            [
+                                            "description" => "Get an item.", 
+                                            "parameters" => 
+                                                [
+                                                "item ID" => 
+                                                    ["type" => "int", "description" => "Specifies a specific item to return.", "required" => false],
+                                                "featured" =>
+                                                    ["type" => "string", "description" => "Modifier that dictates to return featured items.", "required" => false],
+                                                "category" =>
+                                                    ["type" => "double", "description" => "Modifier that dictates to return items under a specific category.", "required" => false],
+                                                "category ID" =>
+                                                    ["type" => "int", "description" => "The specific category to return items from.", "required" => false],
+                                                "search" =>
+                                                    ["type" => "string", "description" => "Modifier that dictates to return items using a search value.", "required" => false],
+                                                "search value" =>
+                                                    ["type" => "string", "description" => "The search value to use.", "required" => false],
+                                                "stock" =>
+                                                    ["type" => "string", "description" => "Modifier that dictates to return items under a stock threshold.", "required" => false],
+                                                "stock threshold" =>
+                                                    ["type" => "string", "description" => "Stock threshold.", "required" => false]
+                                                ]
+                                            ],
+                                        "POST" => 
+                                            [
+                                            "description" => "Add a new item.", 
+                                            "parameters" => 
+                                                [
+                                                "name" => 
+                                                    ["type" => "string", "description" => "Name for the new item.", "required" => true],
+                                                "category" =>
+                                                    ["type" => "int", "description" => "Category ID for the new item.", "required" => true],
+                                                "desc" =>
+                                                    ["type" => "string", "description" => "Description for the new item.", "required" => true],
+                                                "weight" =>
+                                                    ["type" => "double", "description" => "Weight for the new item.", "required" => true],
+                                                "featured" =>
+                                                    ["type" => "int", "description" => "Featured (1) or not (0).", "required" => true],
+                                                "price" =>
+                                                    ["type" => "double", "description" => "Price for the new item.", "required" => true],
+                                                "stock" =>
+                                                    ["type" => "int", "description" => "Stock level for the new item.", "required" => true]
+                                                ]
+                                            ],
+                                        "PUT" => 
+                                            [
+                                            "description" => "Modify an existing item.", 
+                                            "parameters" => 
+                                                [
+                                                "item ID" => 
+                                                    ["type" => "int", "description" => "ID of the item to modify.", "required" => true],
+                                                "name" => 
+                                                    ["type" => "string", "description" => "Name for the item.", "required" => true],
+                                                "category" =>
+                                                    ["type" => "int", "description" => "Category ID for the item.", "required" => true],
+                                                "desc" =>
+                                                    ["type" => "string", "description" => "Description for the item.", "required" => true],
+                                                "weight" =>
+                                                    ["type" => "double", "description" => "Weight for the item.", "required" => true],
+                                                "featured" =>
+                                                    ["type" => "int", "description" => "Featured (1) or not (0).", "required" => true],
+                                                "price" =>
+                                                    ["type" => "double", "description" => "Price for the item.", "required" => true],
+                                                "stock" =>
+                                                    ["type" => "int", "description" => "Stock level for the item.", "required" => true]
+                                                ]
+                                            ],
+                                        "DELETE" => 
+                                            [
+                                            "description" => "Delete an item.", 
+                                            "parameters" => 
+                                                [
+                                                "item ID" => 
+                                                    ["type" => "int", "description" => "ID of the item to delete.", "required" => true]
+                                                ]
+                                            ]
+                                    ]; // Put the data into the $this->resp['data'] element
+                // </editor-fold>
+                break;
 
             default:
                 $this->statusCode = 405;
@@ -490,6 +626,67 @@ class Main extends API {
 
                 $stmt->execute();
                 $this->resp['data'] = "Deleted";
+                // </editor-fold>
+                break;
+                
+            case "OPTIONS":
+                // <editor-fold defaultstate="collapsed" desc="OPTIONS">
+                $this->resp['data'] = [
+                                        "GET" => 
+                                            [
+                                            "description" => "Get a delivery option.", 
+                                            "parameters" => 
+                                                [
+                                                "delivery ID" => 
+                                                    ["type" => "int", "description" => "Specifies a specific delivery option to return.", "required" => false],
+                                                "max-weight" =>
+                                                    ["type" => "string", "description" => "Modifier that dictates that the next next argument will be used as the value to return all delivery options up to this max weight value.", "required" => false],
+                                                "max-weight value" =>
+                                                    ["type" => "double", "description" => "Value to return all delivery options up to this max weight value.", "required" => false]
+                                                ]
+                                            ],
+                                        "POST" => 
+                                            [
+                                            "description" => "Add a new delivery option.", 
+                                            "parameters" => 
+                                                [
+                                                "name" => 
+                                                    ["type" => "string", "description" => "Name for the new delivery option.", "required" => true],
+                                                "maxWeight" =>
+                                                    ["type" => "double", "description" => "Max weight for the new delivery option.", "required" => true],
+                                                "ecoRating" =>
+                                                    ["type" => "int", "description" => "Eco rating for the new delivery option.", "required" => true],
+                                                "cost" =>
+                                                    ["type" => "double", "description" => "Cost for the new delivery option.", "required" => true]
+                                                ]
+                                            ],
+                                        "PUT" => 
+                                            [
+                                            "description" => "Modify an existing delivery option.", 
+                                            "parameters" => 
+                                                [
+                                                "delivery option ID" => 
+                                                    ["type" => "int", "description" => "ID of the delivery option to modify.", "required" => true],
+                                                "name" => 
+                                                    ["type" => "string", "description" => "Name for the delivery option.", "required" => true],
+                                                "maxWeight" =>
+                                                    ["type" => "double", "description" => "Max weight for the delivery option.", "required" => true],
+                                                "ecoRating" =>
+                                                    ["type" => "int", "description" => "Eco rating for thedelivery option.", "required" => true],
+                                                "cost" =>
+                                                    ["type" => "double", "description" => "Cost for the delivery option.", "required" => true]
+                                                ]
+                                            ],
+                                        "DELETE" => 
+                                            [
+                                            "description" => "Delete a delivery option.", 
+                                            "parameters" => 
+                                                [
+                                                "delivery option ID" => 
+                                                    ["type" => "int", "description" => "ID of the delivery option to delete.", "required" => true]
+                                                ]
+                                            ]
+                                    ]; // Put the data into the $this->resp['data'] element
                 // </editor-fold>
                 break;
 
