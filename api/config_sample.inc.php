@@ -10,11 +10,11 @@
 /*
  * Only edit the below constant definitions
  */
-const DB_TYPE = "mysql";
-const DB_HOST = "localhost";
-const DB_NAME = "ecocart";
-const DB_USER = "root";
-const DB_PASSWORD = "";
+const DB_TYPE = "mysql"; // Database type (default: mysql)
+const DB_HOST = "localhost"; // Database host (default: localhost)
+const DB_NAME = "ecocart"; // Database name (default: ecocart)
+const DB_USER = "root"; // Database user (default: root)
+const DB_PASSWORD = ""; // Database password (default: **none**)
 /*
  * DO NOT MODIFY ANYTHING BELOW
  */
