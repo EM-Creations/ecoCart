@@ -23,13 +23,13 @@ main>section {
 }
 
 /* Sections */
-main>section#options>header, main>section#categories>header, main>section#delivery-opts>header, main>section#products>header, main>section#product>header {
+main>section#options>header, main>section#categories>header, main>section#delivery-opts>header, main>section#products>header, main>section#product>header, main>section#settings>header {
     font-size: 18pt;
     font-weight: bold;
     margin-bottom: 1%;
 }
 
-section#categories, section#products, section#delivery-opts, section#product { /* Focussed display sections */
+section#categories, section#products, section#delivery-opts, section#product, section#settings { /* Focussed display sections */
     float: left;
     margin: 2%;
     box-shadow: 0 3px 3px #888888;
