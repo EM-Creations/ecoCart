@@ -34,7 +34,7 @@ main div.grid>section.grid-item>div.price {
 /* Item */
 section#item, section#basket, section#order, section#confirm { /* Focussed item's display section */
     float: left;
-    margin: 0 2%;
+    margin: 0 2% 1% 2%;
     box-shadow: 0 3px 3px #888888;
     border: 1px solid #D6D6D6;
     width: 100%;
@@ -44,11 +44,15 @@ section#item, section#basket, section#order, section#confirm { /* Focussed item'
 
 section#item>header {
     font-weight: bold;
+    font-size: 18pt;
+    margin: 1% 0;
 }
 
 section#item>div.price {
     color: #6B6B6B;
     font-weight: bold;
+    font-size: 14pt;
+    margin-top: 1%;
 }
 
 .add-to-basket {
@@ -103,4 +107,5 @@ div.add-to-basket-confirm, div.complete-order-confirm {
 /* Misc */
 img#main {
     max-width: 100%;
+    max-height: 400px;
 }
