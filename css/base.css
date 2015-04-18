@@ -14,6 +14,13 @@
     }
 }
 
+/* Smaller than 785px styles */
+@media (max-width: 785px) {
+    td {
+        display: inline-block;
+    }
+}
+
 /* Bigger than 530px styles */
 @media (min-width: 531px) {
     aside#catNav {
