@@ -9,13 +9,14 @@
 
 /* Smaller than 530px styles */
 @media (max-width: 530px) {
+    main {
+        width: 98%;
+    }
+    
     aside#catNav {
         width: 100%;
     }
-}
-
-/* Smaller than 785px styles */
-@media (max-width: 785px) {
+    
     td {
         display: inline-block;
     }
@@ -23,8 +24,12 @@
 
 /* Bigger than 530px styles */
 @media (min-width: 531px) {
+    main {
+        width: 80%;
+    }
+    
     aside#catNav {
-        width: 175px;
+        width: 15%;
     }
 }
 
@@ -93,8 +98,8 @@ aside#catNav>nav>ul>li {
 
 /* Main content styling */
 main {
+    float: left;
     display: block; /* Neccessary for older browsers which don't display the "main" element correctly */
-	margin: 0 8% 1% 13%;
     min-height: 600px;
 }
 

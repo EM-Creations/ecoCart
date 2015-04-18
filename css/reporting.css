@@ -88,6 +88,12 @@ div#view-order-container>div#view-order-content>button {
     float: right;
 }
 
+/* Tables */
+table#ordersTable td {
+    word-break: break-word;
+    word-wrap: break-word;
+}
+
 /* Misc */
 div#turnover {
     float: right;

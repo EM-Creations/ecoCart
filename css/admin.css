@@ -72,6 +72,11 @@ table#product-table label {
     font-weight: normal;
 }
 
+table#settingsTable td.value {
+    word-break: break-word;
+    word-wrap: break-word;
+}
+
 /* Misc */
 fieldset {
     margin: 1% 0;
