@@ -18,6 +18,7 @@ header#mainHeader>div#headerText {
     font-size: 14pt;
 }
 
+/* Main */
 main>section {
     margin-top: 1%;
 }
@@ -31,7 +32,6 @@ main>section#options>header, main>section#categories>header, main>section#delive
 
 section#categories, section#products, section#delivery-opts, section#product, section#settings { /* Focussed display sections */
     float: left;
-    margin: 2%;
     box-shadow: 0 3px 3px #888888;
     border: 1px solid #D6D6D6;
     width: 100%;

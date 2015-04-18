@@ -87,8 +87,8 @@ aside#catNav>nav>ul>li {
 /* Main content styling */
 main {
     display: block; /* Neccessary for older browsers which don't display the "main" element correctly */
-	margin: 1% 8% 1% 13%;
-    min-height: 600px; /* TODO: May have to change this later to be more dynamic */
+	margin: 0 8% 1% 13%;
+    min-height: 600px;
 }
 
 /* Grid styling */
