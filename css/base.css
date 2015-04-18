@@ -7,6 +7,20 @@
 
 @import url(//fonts.googleapis.com/css?family=Roboto:400italic,700,400); /* Google's Roboto Font */
 
+/* Smaller than 530px styles */
+@media (max-width: 530px) {
+    aside#catNav {
+        width: 100%;
+    }
+}
+
+/* Bigger than 530px styles */
+@media (min-width: 531px) {
+    aside#catNav {
+        width: 175px;
+    }
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
@@ -46,9 +60,8 @@ header#mainHeader>div#headerRight>span.link {
 /* Category Navigation */
 aside#catNav {
     float: left;
-    width: 175px;
     padding: 2px;
-    margin: .7% 0 1% 0;
+    margin: .7% 10px 1% 0;
     background-color: #e5e2d9;
     border-radius: 0 5px 5px 0;
     box-shadow: 3px 3px 2px #888888;
@@ -75,7 +88,6 @@ aside#catNav>nav>ul>li {
 main {
     display: block; /* Neccessary for older browsers which don't display the "main" element correctly */
 	margin: 1% 8% 1% 13%;
-    width: 75%;
     min-height: 600px; /* TODO: May have to change this later to be more dynamic */
 }
 
