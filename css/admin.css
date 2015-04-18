@@ -86,6 +86,10 @@ div#error {
     color: #d12525;
 }
 
+span.styleSetting {
+    font-weight: bold;
+}
+
 img#image-preview {
     background-color: #FFFFFF;
     width: 200px;
