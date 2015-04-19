@@ -321,6 +321,14 @@ class Main extends API {
                 $fileName = $_FILES['image']['name'];
                 $tmpFile = $_FILES['image']['tmp_name'];
                 $dest =  $imageUploadsDir . "/" . $fileName;
+                if (file_exists($dest)) { // If this file name already exists
+                    // Make the filename unique
+                    $lastDot = strrpos($fileName, '.');
+                    $extension = substr($fileName, $lastDot);
+                    $fileName = substr($fileName, 0, $lastDot);
+                    $fileName = $fileName . uniqid() . $extension;
+                    $dest = $imageUploadsDir . "/" . $fileName;
+                }
                 move_uploaded_file($tmpFile, $dest);
                 
                 $imgStr = "INSERT INTO `item_image` (`item_id`, `image`, `main`) VALUES (:itemID, :image, 1)";
@@ -372,6 +380,14 @@ class Main extends API {
                         $fileName = $_FILES['name'];
                         $tmpFile = $_FILES['tmp_name'];
                         $dest =  $imageUploadsDir . "/" . $fileName;
+                        if (file_exists($dest)) { // If this file name already exists
+                            // Make the filename unique
+                            $lastDot = strrpos($fileName, '.');
+                            $extension = substr($fileName, $lastDot);
+                            $fileName = substr($fileName, 0, $lastDot);
+                            $fileName = $fileName . uniqid() . $extension;
+                            $dest = $imageUploadsDir . "/" . $fileName;
+                        }
                         if (!rename($tmpFile, $dest)) { // Use rename (not move_uploaded_file) due to move_uploaded_file only working with files uploaded through POST
                             $this->resp['error'] = "Couldn't move uploaded file."; // Return error message
                             $this->resp['name'] = $fileName; // Return error message
