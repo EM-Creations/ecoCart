@@ -37,3 +37,4 @@ Directory hierarchy explanation
 * **lib** - JavaScript files are located here  
 * **prototyping** - Directory containing prototypes built
 * **reporting** - Reporting directory, for access by staff only - Includes warnings for product stock levels and order information
+* **settingsStyles.css** - Directory containing dynamically the created CSS file from admin settings
