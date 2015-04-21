@@ -16,6 +16,11 @@ print("<!doctype html>\n"
 if (file_exists($configFile)) { // If the configuration file exists
     require($configFile); // Require the configuration file
     
+    // Create database
+    print("<h2>Creating database</h2>\n");
+    $db_conn->query("CREATE DATABASE IF NOT EXISTS `ecocart` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+                    USE `ecocart`;");
+    
     // Create tables
     print("<h2>Creating tables</h2>\n");
     print("\n<p>Creating category table...... ");

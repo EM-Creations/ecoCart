@@ -18,6 +18,8 @@ if (file_exists($configFile)) { // If the configuration file exists
     exit; // Kill the script
 }
 
+$db_conn->query("USE `ecocart`;"); // Use the ecocart database
+
 try {
     $api = new Main();
     print($api->processAPI());

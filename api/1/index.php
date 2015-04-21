@@ -27,6 +27,8 @@ $orderBy = Lib::getRequestVar('orderBy', FILTER_SANITIZE_STRING);
 $orderType = Lib::getRequestVar('orderType', FILTER_SANITIZE_STRING);
 $ssv = Lib::getRequestVar('ssv', FILTER_SANITIZE_NUMBER_INT);
 
+$db_conn->query("USE `ecocart`;"); // Use the ecocart database
+
 switch ($action) { // Process the specified action
     // <editor-fold defaultstate="collapsed" desc="Process actions">
     case "categories":

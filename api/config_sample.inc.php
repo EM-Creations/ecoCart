@@ -28,12 +28,10 @@ switch (DB_TYPE) {
         $pdoStr = "mysql:";
 }
 
-$pdoStr .= "host=" . DB_HOST . ";" . "dbname=" . DB_NAME; // Build the PDO string
+$pdoStr .= "host=" . DB_HOST . ";"; // Build the PDO string
 
 try { // Try to connect to the database
     $db_conn = new PDO($pdoStr, DB_USER, DB_PASSWORD);
-    // TODO: Modify the line below before completion
-    $db_conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Set the error mode to exception FOR DEV ONLY!
 } catch (PDOException $pdoE) { // If an exception was caught
 	API::outputStatus(500); // Internal Server Error (500)
     print(json_encode(["errorMsg"=>"Could not connect to database." , "errorDetails"=>$pdoE->getMessage(), "errorCode"=>11])); // Output the exception's message
