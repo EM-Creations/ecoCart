@@ -114,13 +114,22 @@ if (file_exists($configFile)) { // If the configuration file exists
     // Insert data
     print("\n<p>Inserting data...... ");
     $settingData = $db_conn->prepare("INSERT INTO `setting` (`id`, `name`, `value`) VALUES
-                                        (1, 'url', 'http://localhost/WEBSCRP/Coursework/ecoCart/'),
+                                        (1, 'url', 'http://localhost/608985/'),
                                         (2, 'name', 'ecoCart'),
-                                        (3, 'style-header!id!mainHeader!attr!background-color', '#FFFFFF'),
+                                        (3, 'stock_level_warning_threshold', '10'),
                                         (4, 'style-body!attr!color', '#000000'),
                                         (5, 'style-body!attr!font-family', 'roboto'),
-                                        (6, 'style-!class!link!attr!color', '#00248F'),
-                                        (7, 'style-!class!link:hover!attr!color', '#CCCC00');");
+                                        (6, 'style-!class!link!attr!color', '#00248f'),
+                                        (7, 'style-!class!link:hover!attr!color', '#CCCC00'),
+                                        (8, 'style-aside!id!catNav!attr!background-color', '#e5e2d9'),
+                                        (9, 'style-header!id!mainHeader!attr!background-color', '#FFFFFF'),
+                                        (10, 'style-!id!container!attr!background-color', 'inherit'),
+                                        (11, 'style-main!attr!background-color', 'inherit'),
+                                        (12, 'style-button!attr!cursor', 'pointer'),
+                                        (13, 'style-button!attr!font-weight', 'bold'),
+                                        (14, 'style-button!attr!border-radius', '3px'),
+                                        (15, 'style-section!class!grid-item!attr!background-color', 'inherit'),
+                                        (16, 'style-section!attr!background-color', 'inherit');");
     $settingData->execute();
     print("done!</p>");
     
