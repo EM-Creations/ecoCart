@@ -7,6 +7,8 @@
 header("Content-type: text/css"); // Content type is text/css
 require(__DIR__ . "/../api/config.inc.php"); // Require the configuration file
 
+$db_conn->query("USE `ecocart`;"); // Use the ecocart database
+
 $stmt = $db_conn->prepare("SELECT `name`, `value` FROM `setting` WHERE `name` LIKE 'style-%'"); // Get all style settings
 $stmt->execute();
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC); // Fetch the results as an associative array
