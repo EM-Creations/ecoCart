@@ -1,0 +1,68 @@
+Prototype:
+08/11/2014 - 3 hours
+09/11/2014 - 1 hour
+
+Gantt Chart:
+09/11/2014 - 1 hour
+
+JavaScript / CSS:
+11/12/2014 - 1 hour
+19/12/2014 - 1 1/2 hours
+20/12/2014 - 2 hours
+22/12/2014 - 1 hour
+27/12/2014 - 1 hour
+03/01/2015 - 40 minutes
+19/01/2015 - 1 hour
+21/01/2015 - 1 hour
+25/01/2015 - 5 hours
+26/01/2015 - 2 hours
+08/02/2015 - 1 hour 40 minutes
+10/02/2015 - 30 minutes
+13/02/2015 - 10 minutes
+16/02/2015 - 3 hours
+17/02/2015 - 1 hour
+18/02/2015 - 2 hours
+24/02/2015 - 30 minutes
+03/03/2015 - 30 minutes
+17/03/2015 - 30 minutes
+20/03/2015 - 1 hour
+21/03/2015 - 3 hours
+22/03/2015 - 2 hours
+23/03/2015 - 30 minutes
+24/03/2015 - 20 minutes
+27/03/2015 - 30 minutes
+28/03/2015 - 30 minutes
+29/03/2015 - 1 hour
+30/03/2015 - 2 hours
+31/03/2015 - 2 hours
+17/04/2015 - 1 hour
+18/04/2015 - 3 hours
+19/04/2015 - 30 minutes
+20/04/2015 - 2 hours
+
+PHP:
+18/12/2014 - 1 1/2 hours
+21/12/2014 - 1 hour
+22/12/2014 - 1/2 hour
+23/12/2014 - 1 hour
+27/12/2014 - 1 hour
+03/01/2015 - 20 minutes
+14/01/2015 - 1 hour
+15/01/2015 - 1 1/2 hours
+19/01/2015 - 10 minutes
+26/01/2015 - 1 hour
+06/02/2015 - 20 minutes
+08/02/2015 - 20 minutes
+24/02/2015 - 30 minutes
+20/03/2015 - 30 minutes
+21/03/2015 - 1 hour
+22/03/2015 - 30 minutes
+23/03/2015 - 30 minutes
+24/03/2015 - 20 minutes
+25/03/2015 - 10 minutes
+29/03/2015 - 1 hour
+30/03/2015 - 1 hour
+31/03/2015 - 1 hour
+14/04/2015 - 1 hour
+16/04/2015 - 30 minutes
+19/04/2015 - 30 minutes
