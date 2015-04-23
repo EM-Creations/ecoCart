@@ -12,14 +12,14 @@ through products (organised into categories) and make online purchases through
 the web application.
 
 The product also allows staff to update company information, the colour scheme  
-(of the user interface), manage their product catalogue (updating product descriptions,  
-pictures and whether a product is "featured" or not) and delivery options at any time  
+(of the user interface), manage their product catalogue (updating product descriptions, image 
+and whether a product is "featured" or not) and delivery options at any time  
 as well as supplying staff with customer delivery information, reports on sales and  
 present them with real-time information concerning their organisation's product stock levels.
 
 The product further implements exclusive environmentally friendly features, encouraging  
-their customers to make environmentally friendly choices. Including: highlighting the  
-most environmentally friendly delivery options (at the checkout stage). The application is also  
+their customers to make environmentally friendly choices. Including: placing the  
+most environmentally friendly delivery options first (at the checkout stage). The application is also  
 designed to run on low powered and low performance server hardware in order to help  
 reduce the business' carbon footprint.
 
