@@ -123,7 +123,6 @@ switch ($action) { // Process the specified action
 
     default: // If the action is invalid
         $jsonResp['resp']['error'] = ['code' => 501, 'msg' => "Not implemented"];
-        $json['resp']['vars'] = $_REQUEST; // TODO: Remove after testing
         break;
     // </editor-fold>
 }
